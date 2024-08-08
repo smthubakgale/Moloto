@@ -62,7 +62,7 @@
           .hm{
             display:flex;
             font-size:16px;
-            cursor;pointer;
+            cursor:pointer;
           }
         
         </style>
@@ -93,9 +93,7 @@
     
     <script>
        $(window).on("load",function()
-       {
-          //:
-
+       { 
           //:
           $(".hm").on("click',function()
           {
@@ -108,6 +106,7 @@
          function nex(ts)
          {
            var p = $(this).attr("ref");
+           console.log(p);
            $(".bod").attr("src", p);
          }
        });
