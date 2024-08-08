@@ -103,12 +103,14 @@
           {
              nex(this); 
           });
-         function nex(ts)
-         {
-           var p = $(this).attr("ref");
-           console.log(p);
-           $(".bod").attr("src", p);
+          function nex(ts)
+          {
+            var p = $(ts).attr("ref");
+            console.log(p);
+            $(".bod").attr("src", p);
          }
+
+      console.log("loaded");
        });
     </script>
   
