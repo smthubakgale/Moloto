@@ -75,6 +75,9 @@
     var writeKey = window.parent.writeKey;
     var readKey = window.parent.readKey;
 
+    console.log(writeKey);
+    console.log(readKey);
+
     $(window).on("load",function()
     {
        $("#sub1").on("click",function()
@@ -82,7 +85,21 @@
            var current = $("#current").val();
            var voltage = $("#voltage").val();
 
-           
+           $.ajax({
+             url : "https://api.thingspeak.com/update" ,
+             data:{
+               api_key: writeKey ,
+               Current:current ,
+               Voltage : voltage
+             },
+             success:function(r){
+               console.log(r);
+             } , 
+             error: function(e){
+               console.error(e)
+             }
+           });
+             
        });
     });
     
