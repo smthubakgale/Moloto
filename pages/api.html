@@ -48,13 +48,13 @@
       <div>
         <div class="mb-3 mt-3">
         <label for="current">Current : </label>
-        <input type="number" class="form-control" id="current" placeholder="Enter current value" name="current">
+        <input type="number" min="0" value="0" class="form-control" id="current" placeholder="Enter current value" name="current">
       </div>
       <div class="mb-3">
         <label for="voltage">Voltage:</label>
-        <input type="password" class="form-control" id="voltage" placeholder="Enter voltage" name="voltage">
+        <input type="number" min="0" value="0" class="form-control" id="voltage" placeholder="Enter voltage" name="voltage">
       </div> 
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button id="sub1" type="submit" class="btn btn-primary">Submit</button>
       </div>
     </div>
     <div class="fm">
@@ -70,5 +70,22 @@
     </div>
     </div>
   </main>
+
+  <script>
+    var writeKey = window.parent.writeKey;
+    var readKey = window.parent.readKey;
+
+    $(window).on("load",function()
+    {
+       $("#sub1").on("click",function()
+       {
+           var current = $("#current").val();
+           var voltage = $("#voltage").val();
+
+           
+       });
+    });
+    
+  </script>
 </body>
 </html>
