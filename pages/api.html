@@ -109,6 +109,43 @@
       }
       tcf();
 
+      function getTime(t)
+      {
+         var v = $(t).val(); 
+         var ms = Date.now();
+
+        if(v == "minute")
+        {
+           ms.setMinutes(ms.getMinutes() - 1);
+        }
+
+        if(v == "hour")
+        {
+           ms.setHours(ms.getHours() - 1);
+        }
+
+        if(v == "day")
+        {
+           ms.setDate(ms.getDate() - 1);
+        }
+
+        if(v == "week")
+        {
+           ms.setDate(ms.getDate() - 7);
+        }
+
+        if(v == "month")
+        {
+           ms.setMonth(1ms.getMonth() - 1);
+        }
+
+        if(v == "year")
+        {
+           ms.setFullYear(1ms.getFullYear() - 1);
+        }
+
+        var tm = 
+      }
       function tcf()
       {
         var val = $("#rfr").val();
