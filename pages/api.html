@@ -93,6 +93,7 @@
     var channel_Id = window.parent.channel_Id;
     var rdC = -1;
     var tcR;
+    var psR;
 
     console.log(writeKey);
     console.log(readKey);
@@ -109,7 +110,8 @@
       }
       tcf();
 
-      function getTime(t)
+      getTime($("#pst")[0])
+      window["getTime"] = function(t)
       {
          var v = $(t).val(); 
          var ms = Date.now();
@@ -144,7 +146,14 @@
            ms.setFullYear(1ms.getFullYear() - 1);
         }
 
-        var tm = 
+        var dt = ms;
+        const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
+
+        var st = `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())}%20`
+          + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
+
+        console.log(st);
+        psR = st;
       }
       function tcf()
       {
