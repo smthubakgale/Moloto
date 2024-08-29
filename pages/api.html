@@ -97,7 +97,15 @@
       <div> 
         <br/>
         live : <input style="margin-left:10px;" id="lv" onchange="live(this)" type="checkbox" />
-        <input style="margin-left:10px; width:60px; text-align:center;" type="number" min="1" value="1" placeholder="Refresh time (seconds)">
+        <input id="rfr"style="margin-left:10px; width:60px; text-align:center;" type="number" min="1" value="1000" title="Refresh time ( milli seconds)">
+        <select id="pst" style="margin-left:10px">
+          <option> minute </option>
+          <option> hour </option>
+          ,option> day </option>
+          <option> week </option>
+          <option> month </option>
+          <option> year </option>
+        </select>
         <br/><br/>
         time filter : <input style="margin-left:10px;" id="tm" type="checkbox" />
         <input style="margin-left:10px;" type="datetime-local" title="Start Time">
