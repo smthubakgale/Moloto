@@ -76,7 +76,7 @@
           <option> month </option>
           <option> year </option>
         </select>
-        
+        <div style="margin-left:10px;" id="km"></div>
         <br/><br/>
         time filter : <input style="margin-left:10px;" id="tm" type="checkbox" />
         <input id="ss1" style="margin-left:10px;" type="datetime-local" title="Start Time">
@@ -160,6 +160,16 @@
           + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
 
         //console.log(v , st);
+
+        if(tcp)
+        {
+           $("#km").html(st +" to Now"); 
+        }
+        else
+        {
+           $("#km").html(""); 
+        }
+        
         psR = st;
       }
       
