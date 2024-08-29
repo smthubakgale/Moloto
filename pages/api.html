@@ -67,7 +67,8 @@
         <br/>
         live : <input style="margin-left:10px;" id="lv" onchange="live(this)" type="checkbox" />
         <input id="rfr" onchange="rdft(this)" style="margin-left:10px; width:60px; text-align:center;" type="number" min="1" value="1000" title="Refresh time ( milli seconds)">
-        <select id="pst" onchange="getTime(this)" style="margin-left:10px">
+        <input id="rf" onchange="rdt(this)" style="margin-left:10px; width:60px; text-align:center;" type="number" min="1" value="1" title="Past Value">
+        <select id="pst" title="Past Unit" onchange="getTime(this)" style="margin-left:10px">
           <option> minute </option>
           <option> hour </option>
           <option> day </option>
@@ -75,6 +76,7 @@
           <option> month </option>
           <option> year </option>
         </select>
+        
         <br/><br/>
         time filter : <input style="margin-left:10px;" id="tm" type="checkbox" />
         <input id="ss1" style="margin-left:10px;" type="datetime-local" title="Start Time">
@@ -94,6 +96,7 @@
     var rdC = -1;
     var tcR;
     var psR;
+    var qt = 1;
 
     //console.log(writeKey);
     //console.log(readKey);
@@ -110,6 +113,11 @@
       }
       tcf();
 
+      window["rdt"] = function(ts){
+         var val = $(this).val();
+        console.log(val);
+        qt = val;
+      }
       window["getTime"] = function(t)
       {
          var v = $(t).val(); 
@@ -117,32 +125,32 @@
 
         if(v == "minute")
         {
-           ms.setMinutes(ms.getMinutes() - 1);
+           ms.setMinutes(ms.getMinutes() - qt);
         }
 
         if(v == "hour")
         {
-           ms.setHours(ms.getHours() - 1);
+           ms.setHours(ms.getHours() - qt);
         }
 
         if(v == "day")
         {
-           ms.setDate(ms.getDate() - 1);
+           ms.setDate(ms.getDate() - qt);
         }
 
         if(v == "week")
         {
-           ms.setDate(ms.getDate() - 7);
+           ms.setDate(ms.getDate() - 7*qt);
         }
 
         if(v == "month")
         {
-           ms.setMonth(ms.getMonth() - 1);
+           ms.setMonth(ms.getMonth() - qt);
         }
 
         if(v == "year")
         {
-           ms.setFullYear(ms.getFullYear() - 1);
+           ms.setFullYear(ms.getFullYear() - qt);
         }
 
         var dt = ms;
