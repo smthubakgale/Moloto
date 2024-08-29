@@ -194,18 +194,16 @@
 
         var vn = $("#tm").is(":checked");
 
-        if(tcp){
+        if(tcp)
         {
           ur += "$start=pSR";
         }
-        else 
+        else if(vn == true)
         {
-          if(vn == true){
            var s1 = $("#ss1").val();
            var s2 = $("#ss2").val();
 
-           console.log(s1 , s2);
-          }
+           console.log(s1 , s2); 
         }
        
          fetch(ur).then((r)=>
