@@ -89,18 +89,31 @@
         </div> 
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
+    <div class="fm">
+      <div>
+        Get Data Data
+      </div>
+      <div> 
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <div id="get"></div>
+    </div>
     </div>
   </main>
 
   <script>
     var writeKey = window.parent.writeKey;
     var readKey = window.parent.readKey;
+    var channel_Id = window.parent.channel_Id;
 
     console.log(writeKey);
     console.log(readKey);
 
     $(window).on("load",function()
     {
+       $("#get").on("click", function()
+       {
+                     
+       });
        $("#sub1").on("click",function()
        {
            var current = $("#current").val();
