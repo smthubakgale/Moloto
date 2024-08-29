@@ -109,7 +109,7 @@
     var writeKey = window.parent.writeKey;
     var readKey = window.parent.readKey;
     var channel_Id = window.parent.channel_Id;
-    var rdC = 10;
+    var rdC = -1;
 
     console.log(writeKey);
     console.log(readKey);
@@ -142,7 +142,13 @@
 
       function nex()
       {
-var ur = "https://api.thingspeak.com/channels/"+ channel_Id + "/feeds.json?api_key=" + readKey + "&results=" + rdC; 
+        var ur = "https://api.thingspeak.com/channels/"+ channel_Id + "/feeds.json?api_key=" + readKey ;
+
+        if(rdC > 0)
+        {
+           ur += "&results=" + rdC; 
+        }
+       
          fetch(ur).then((r)=>
              {
                 console.log(r.status)
