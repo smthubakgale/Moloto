@@ -192,11 +192,13 @@
            ur += "&results=" + rdC; 
         }
 
+        var vn = $("#tm").is(":checked");
+
         if(tcp){
         {
           ur += "$start=pSR";
         }
-        else if($("#tm").is(":checked"))
+        else if(vn == true)
         {
            var s1 = $("#ss1").val();
            var s2 = $("#ss2").val();
