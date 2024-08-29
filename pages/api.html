@@ -115,7 +115,7 @@
 
     $(window).on("load",function()
     {
-       function live(ts)
+       window["live"] = function(ts)
        {
            var val = $(ts).val();
 
