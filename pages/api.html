@@ -196,7 +196,7 @@
 
         if(tcp)
         {
-          ur += "$start=" + psR;
+          ur += "&start=" + psR;
         }
         else if(vn == true)
         {
@@ -217,8 +217,9 @@
 
              //console.log(s1 , s2); 
 
-             ur += "$start=" + s1;
-             ur += "$end=" + s2;
+             ur += "&start=" + s1;
+             ur += "&end=" + s2;
+            
              function tq(ms){
                var dt = ms;
                const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
@@ -229,7 +230,7 @@
           }
         }
 
-        console.log(ur);
+         //console.log(ur);
        
          fetch(ur).then((r)=>
              {
