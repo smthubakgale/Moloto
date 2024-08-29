@@ -104,6 +104,7 @@
     var writeKey = window.parent.writeKey;
     var readKey = window.parent.readKey;
     var channel_Id = window.parent.channel_Id;
+    var rdC = 10;
 
     console.log(writeKey);
     console.log(readKey);
@@ -112,7 +113,7 @@
     {
        $("#get").on("click", function()
        {
-                     
+          var ur = "https://api.thingspeak.com/channels/"+ channel_Id + "/feeds.json?api_key=" + readKey + "&results=" + rdC;         
        });
        $("#sub1").on("click",function()
        {
