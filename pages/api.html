@@ -95,7 +95,7 @@
         Get Data Data
       </div>
       <div> 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button id="gt1" type="submit" class="btn btn-primary">Submit</button>
         <div id="get"></div>
     </div>
     </div>  
@@ -112,7 +112,7 @@
 
     $(window).on("load",function()
     {
-       $("#get").on("click", function()
+       $("#gt1").on("click", function()
        {
           var ur = "https://api.thingspeak.com/channels/"+ channel_Id + "/feeds.json?api_key=" + readKey + "&results=" + rdC; 
          fetch(ur).then((r)=>
