@@ -115,16 +115,32 @@
 
     $(window).on("load",function()
     {
+      var tcp = false;
+      
+      setInterval(function()
+      {
+         if(tcp)
+         {
+            nex();
+         }
+        
+      },1000);
+      
        window["live"] = function(ts)
        {
-           var val = $(ts).val();
+           var val = $(ts).is(":checked");
 
           console.log(val);
        }
       
        $("#gt1").on("click", function()
        {
-          var ur = "https://api.thingspeak.com/channels/"+ channel_Id + "/feeds.json?api_key=" + readKey + "&results=" + rdC; 
+          nex();
+       });
+
+      function nex()
+      {
+var ur = "https://api.thingspeak.com/channels/"+ channel_Id + "/feeds.json?api_key=" + readKey + "&results=" + rdC; 
          fetch(ur).then((r)=>
              {
                 console.log(r.status)
@@ -160,7 +176,7 @@
 
              $("#get").html(rr);
            });
-       });
+      }
        $("#sub1").on("click",function()
        {
            var current = $("#current").val();
