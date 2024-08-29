@@ -113,7 +113,18 @@
     {
        $("#get").on("click", function()
        {
-          var ur = "https://api.thingspeak.com/channels/"+ channel_Id + "/feeds.json?api_key=" + readKey + "&results=" + rdC;         
+          var ur = "https://api.thingspeak.com/channels/"+ channel_Id + "/feeds.json?api_key=" + readKey + "&results=" + rdC; 
+         fetch(ur).then((r)=>
+             {
+                console.log(r.status)
+                if(r.status == 200)
+                {
+                  return r.text();
+                }
+             }).then((t)=>
+           {
+              console.log(t);
+           });
        });
        $("#sub1").on("click",function()
        {
