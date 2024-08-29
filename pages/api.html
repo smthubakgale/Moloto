@@ -77,8 +77,8 @@
         </select>
         <br/><br/>
         time filter : <input style="margin-left:10px;" id="tm" type="checkbox" />
-        <input style="margin-left:10px;" type="datetime-local" title="Start Time">
-        <input style="margin-left:10px;" type="datetime-local" title="End Time">
+        <input id="ss1" style="margin-left:10px;" type="datetime-local" title="Start Time">
+        <input id="ss2" style="margin-left:10px;" type="datetime-local" title="End Time">
         <br/><br/>
         <button id="gt1" type="submit" class="btn btn-primary"> GET </button>
         <br/>
@@ -186,10 +186,22 @@
       function nex()
       {
         var ur = "https://api.thingspeak.com/channels/"+ channel_Id + "/feeds.json?api_key=" + readKey ;
-
+ 
         if(rdC > 0)
         {
            ur += "&results=" + rdC; 
+        }
+
+        if(tcp){
+        {
+          ur += "$start=pSR";
+        }
+        else if($("#tm").is(":checked"))
+        {
+           var s1 = $("#ss1").val();
+           var s2 = $("#ss2").val();
+
+           console.log(s1 , s2);
         }
        
          fetch(ur).then((r)=>
