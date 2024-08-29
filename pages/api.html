@@ -203,20 +203,22 @@
            var s1 = $("#ss1").val();
            var s2 = $("#ss2").val();
 
-           console.log(s1 , s2); 
+           //console.log(s1 , s2); 
 
           if(s1 != null && s2 != null)
           {
              s1 = new Date(s1);
              s2 = new Date(s2);
 
-             console.log(s1 , s2); 
+             //console.log(s1 , s2); 
 
              s1 = tq(s1);
              s2 = tq(s2);
 
-             console.log(s1 , s2); 
+             //console.log(s1 , s2); 
 
+             ur += "$start=" + s1;
+             ur += "$end=" + s2;
              function tq(ms){
                var dt = ms;
                const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
