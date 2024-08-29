@@ -155,7 +155,7 @@
        
          fetch(ur).then((r)=>
              {
-                console.log(r.status)
+                if(!tcp){ console.log(r.status) }
                 if(r.status == 200)
                 {
                   return r.text();
@@ -164,7 +164,7 @@
            {
               var d = JSON.parse(t);
 
-               console.log(d);
+               if(!tcp){ console.log(d); } 
 
              var rr = `<table style="width:100%; margin-top:10px; margin-bottom:10px;">
              <tr>
