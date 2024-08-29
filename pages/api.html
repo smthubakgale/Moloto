@@ -128,7 +128,7 @@
 
                console.log(d);
 
-             var rr = `<table>
+             var rr = `<table style="width:100%">
              <tr>
                  <th> Date </th>
                  <th> Current </th>
@@ -136,7 +136,7 @@
               </tr/>
               `;
 
-             d.feeds.ForEach((s)=>
+             d.feeds.forEach((s)=>
                {
                  rr += `<tr>
                  <td> `+ s.created_at + ` </td>
