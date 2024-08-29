@@ -45,25 +45,6 @@
   <main> 
     <div class="fm">
       <div>
-        Channel API Keys
-      </div>
-      <div>
-        <div class="mb-3 mt-3">
-        <label for="current"> Read  </label>
-        <input type="text" class="form-control" id="rd_key" placeholder="Enter read key" name="rd_key">
-        <br/> 
-        default <input type="checkbox" id="ck1" style="margin-left:10px;">
-      </div>
-      <div class="mb-3">
-        <label for="voltage"> Write </label>
-        <input type="text" class="form-control" id="wr_key" placeholder="Enter Write Key" name="wr_key">
-         <br/> 
-         default <input type="checkbox" id="ck2" style="margin-left:10px;">
-      </div>  
-      </div>
-    </div>
-    <div class="fm">
-      <div>
         Post Data
       </div>
       <div>
@@ -80,24 +61,12 @@
     </div>
     <div class="fm">
       <div>
-        Post Sample Data
-      </div>
-      <div>
-        <div class="mb-3 mt-3">
-          <label for="samples"> Samples : </label>
-          <input type="number" class="form-control" id="current" placeholder="Enter number of samples" name="samples">
-        </div> 
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-    </div>
-    <div class="fm">
-      <div>
         <u> Get Data </u>
       </div>
       <div> 
         <br/>
         live : <input style="margin-left:10px;" id="lv" onchange="live(this)" type="checkbox" />
-        <input id="rfr"style="margin-left:10px; width:60px; text-align:center;" type="number" min="1" value="1000" title="Refresh time ( milli seconds)">
+        <input id="rfr" onchange="rdft(this)" style="margin-left:10px; width:60px; text-align:center;" type="number" min="1" value="1000" title="Refresh time ( milli seconds)">
         <select id="pst" style="margin-left:10px">
           <option> minute </option>
           <option> hour </option>
@@ -123,6 +92,7 @@
     var readKey = window.parent.readKey;
     var channel_Id = window.parent.channel_Id;
     var rdC = -1;
+    var tcR;
 
     console.log(writeKey);
     console.log(readKey);
@@ -130,15 +100,27 @@
     $(window).on("load",function()
     {
       var tcp = false;
-      
-      setInterval(function()
+
+      window["rdft"] = function(ts)
       {
-         if(tcp)
-         {
-            nex();
-         }
+         clearInterval(tcR);
+
+        tcf();
+      }
+      tcf();
+
+      function tcf()
+      {
+        var val = $("#rfr").val();
+        tcR = setInterval(function()
+        {
+           if(tcp)
+           {
+               nex();
+           }
         
-      },1000);
+        },val);
+      }
       
        window["live"] = function(ts)
        {
