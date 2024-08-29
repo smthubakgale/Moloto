@@ -110,7 +110,6 @@
       }
       tcf();
 
-      getTime($("#pst")[0])
       window["getTime"] = function(t)
       {
          var v = $(t).val(); 
@@ -155,6 +154,9 @@
         console.log(st);
         psR = st;
       }
+      
+      getTime($("#pst")[0]);
+      
       function tcf()
       {
         var val = $("#rfr").val();
