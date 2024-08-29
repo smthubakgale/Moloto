@@ -105,7 +105,7 @@
        {
            var current = $("#current").val();
            var voltage = $("#voltage").val();
-           var ur = "https://api.thingspeak.com/update?api_key="+ writeKey+"&field1=5";
+           var ur = "https://api.thingspeak.com/update?api_key="+ writeKey+"&field1="+ current +"&field2=" + voltage;
            fetch(ur).then((r)=>
              {
                 console.log(r.status)
