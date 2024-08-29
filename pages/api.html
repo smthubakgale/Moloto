@@ -299,22 +299,13 @@
            fetch(ur).then((r)=>
              {
                 console.log(r.status)
-               
-             })
-           $.ajax({
-             url : "https://api.thingspeak.com/update" ,
-             data:{
-               api_key: writeKey ,
-               field1 :current ,
-               field2 : voltage
-             },
-             success:function(r){
-               console.log(r);
-             } , 
-             error: function(e){
-               console.error(e)
-             }
-           });
+                if(r.status == 200){
+                  alert("Success");
+                }
+               else{
+                 alert("Failed")
+               }
+             }) 
              
        });
     });
