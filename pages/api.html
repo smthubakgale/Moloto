@@ -97,6 +97,7 @@
       <div> 
         <br/>
         live <input id="lv" onchange="live(this)" type="checkbox" />
+        <br/>
         <button id="gt1" type="submit" class="btn btn-primary">Submit</button>
         <br/>
         <div id="get"></div>
@@ -131,6 +132,7 @@
            var val = $(ts).is(":checked");
 
           console.log(val);
+           tcp = val;
        }
       
        $("#gt1").on("click", function()
