@@ -196,7 +196,7 @@
 
         if(tcp)
         {
-          ur += "$start=" + pSR;
+          ur += "$start=" + psR;
         }
         else if(vn == true)
         {
@@ -205,6 +205,8 @@
 
            console.log(s1 , s2); 
         }
+
+        console.log(ur);
        
          fetch(ur).then((r)=>
              {
