@@ -127,6 +127,26 @@
               var d = JSON.parse(t);
 
                console.log(d);
+
+             var rr = `<table>
+             <tr>
+                 <th> Date </th>
+                 <th> Current </th>
+                 <th> Voltage </th>
+              </tr/>
+              `;
+
+             d.feeds.ForEach((s)=>
+               {
+                 rr += `<tr>
+                 <td> `+ s.created_at + ` </td>
+                 <td> `+ s.field1 + ` </td>
+                 <td> `+ s.field2 + ` </td>
+                 </tr>`;
+                 
+               });
+
+             rr += "</table>";
            });
        });
        $("#sub1").on("click",function()
