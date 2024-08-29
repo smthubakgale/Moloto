@@ -233,11 +233,11 @@
           }
         }
 
-         //console.log(ur);
+         console.log(ur);
        
          fetch(ur).then((r)=>
              {
-                if(!tcp){ console.log(r.status) }
+                if(!tcp || true){ console.log(r.status) }
                 if(r.status == 200)
                 {
                   return r.text();
