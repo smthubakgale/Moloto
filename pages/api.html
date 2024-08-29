@@ -76,7 +76,7 @@
           <option> month </option>
           <option> year </option>
         </select>
-        <div style="margin-left:10px;" id="km"></div>
+        <span style="margin-left:10px;" id="km"></span>
         <br/><br/>
         time filter : <input style="margin-left:10px;" id="tm" type="checkbox" />
         <input id="ss1" style="margin-left:10px;" type="datetime-local" title="Start Time">
@@ -163,7 +163,7 @@
 
         if(tcp)
         {
-           $("#km").html(st +" to Now"); 
+           $("#km").html(st.replace("%20"," ") +" to Now"); 
         }
         else
         {
