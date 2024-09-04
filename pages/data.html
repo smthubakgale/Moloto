@@ -156,7 +156,7 @@
         {
             window.parent.import_csv(function(json)
             {
-               console.log(json);
+               console.log(json , Array.isArray(json));
                if(Array.isArray(json))
                {
                   var fin = $("table .fin");
@@ -196,6 +196,8 @@
                         }
                      })
                  }
+
+                 console.log(log);
 
                  if(log.length == 0)
                  { 
