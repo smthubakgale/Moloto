@@ -140,6 +140,53 @@
             window.parent.import_csv(function(json)
             {
                console.log(json);
+               if(Array.isArray(json))
+               {
+                  var fin = $("table .fin");
+                  var log = [];
+                 if(json.length == 0)
+                 {
+                      log.push("Spreadsheet is Empty");
+                 }
+                 else
+                 {
+                     json.forEach((s , k)=>
+                     {
+                        var fr = s.Start_Time;
+                        var to = s.End_Time;
+                        var mt = s.Metal;
+            
+                        if(fr =="" || fr == null){ log.push( "Start Time required for row " + (k + 1)); }
+                        else if(to =="" || to == null){ alert("End Time required for row " + (k + 1)); }
+                        else if(mt =="" || mt == null){ alert("Metal required for row " + (k + 1)); }
+                        else
+                        {
+                          var f = $("table .design tr").clone();
+            
+                          var b1 = $("<button/>").addClass("btn").addClass("btn-danger").html("Delete");
+                          b1.on("click" , function(){ delete_row(this); });
+                          var b2 = $("<button/>").addClass("btn").addClass("btn-warning").html("Update");
+                          b2.on("click" , function(){ update_row(this); });
+                          
+                          f.find("td").html("");
+                          $(f.find("td")[0]).html(fr.replace("T" , " "));
+                          $(f.find("td")[1]).html(to.replace("T" , " "));
+                          $(f.find("td")[2]).html(mt);
+                          $(f.find("td")[3]).html(b1);
+                          $(f.find("td")[4]).html(b2);
+             
+                          fin.append(f);  
+                        }
+                     })
+                 }
+
+                 if(log.length == 0)
+                 { 
+                    $("#fr").val(null);
+                    $("#to").val(null);
+                    $("#mt").val(null);
+                 }
+               }
             });
         });
         $("#exp").on("click" , function()
@@ -216,7 +263,7 @@
               $("#mt").val(null);
               
               setTimeout(function(){
-                alert("Created Successfully");
+                //alert("Created Successfully");
               } , 600);
             }
         });
