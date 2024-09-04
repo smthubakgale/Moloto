@@ -138,11 +138,20 @@
             else if(mt =="" || mt == null){ alert("Metal required"); }
             else{
               var f = $("table .design tr").clone();
+              var fin = $("table .fin");
+
+              var b1 = $("<button/>").addClass("btn").addClass("btn-danger").html("Delete");
+              b1.on("click" , function(){ delete_row(this); });
+              var b2 = $("<button/>").addClass("btn").addClass("btn-warning").html("Update");
+              b2.on("click" , function(){ update_row(this); });
+              
               f.find("td").html("");
               $(f.find("td")[0]).html(fr.replace("T" , " "));
               $(f.find("td")[1]).html(to.replace("T" , " "));
               $(f.find("td")[2]).html(mt);
-              var fin = $("table .fin");
+              $(f.find("td")[3]).html(b1);
+              $(f.find("td")[4]).html(b2);
+ 
               fin.append(f);
             }
         });
