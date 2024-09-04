@@ -129,7 +129,16 @@
     {
         $("#cr").on("click" , function()
         {
-           
+            var fr = $("#fr").val();
+            var to = $("#to").val();
+            var mt = $("#mt").val();
+
+            if(fr =="" || fr == null){ alert("Start Time required"); }
+            else if(to =="" || to == null){ alert("End Time required"); }
+            else if(mt =="" || mt == null){ alert("Metal required"); }
+            else{
+              
+            }
         });
         window["delete_row"] = function(ts)
         {
