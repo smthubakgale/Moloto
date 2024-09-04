@@ -137,7 +137,11 @@
             else if(to =="" || to == null){ alert("End Time required"); }
             else if(mt =="" || mt == null){ alert("Metal required"); }
             else{
-              
+              var f = $("table .design tr").clone();
+              f.find("td").html("");
+              $(f.find("td")[0]).html(fr);
+              var fin = $("table .fin");
+              fin.append(f);
             }
         });
         window["delete_row"] = function(ts)
