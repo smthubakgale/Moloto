@@ -111,6 +111,7 @@
             </div>
             <div id="isr" >
             </div>
+           <br/>
         </div>
         <div>
             <div> Table </div>
@@ -146,6 +147,11 @@
   <script  type="text/javascript">
     $(window).on("load", function()
     {
+        $("#cis").on("click" , function()
+        {
+          $("#isr").html("");
+        });
+      
         $("#imp").on("click" , function()
         {
             window.parent.import_csv(function(json)
@@ -199,7 +205,10 @@
                  }
                  else
                  {
-                   
+                    log.forEach((s)=>
+                    {
+                        $("#isr").append($("<div/>").addClass("c").html(s));
+                    });
                  }
                }
             });
