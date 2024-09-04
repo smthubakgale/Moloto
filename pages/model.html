@@ -5,15 +5,31 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script> 
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js"></script>
+  <script src="scrips.js"></script>
 </head>   
 
 <body>
 <style> 
-
+    body{
+      margin:20px;
+    }
 </style>
 
   <main> 
-    Home 
+
+      <div style="display:flex;">
+        <div style="flex:1;"></div>
+        <div>
+            <button id="sum" class="btn btn-primary" > Model Summary </button>
+        </div>
+      </div>
   </main>
+  <script>
+    $("#sum").on("click" , function()
+    {
+       const model = createModel();
+       tfvis.show.modelSummary({name: 'Model Summary'}, model);
+    });
+  </script>
 </body>
 </html>
