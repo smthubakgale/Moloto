@@ -166,7 +166,14 @@
                 return buf;
                 
         }
-          saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'test.xlsx');
+          //saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'test.xlsx');
+          // Create a link to download the file
+const link = document.createElement("a");
+link.href = URL.createObjectURL(new Blob([s2ab(wbout)], {type: "application/octet-stream"}));
+link.download = "hevo.xlsx";
+
+// Click the link to download the file
+link.click();
           
         });
       
