@@ -100,7 +100,18 @@
        </div>
    </div>
   </div>
-     
+        <div>
+            <div style="display:flex;"> 
+              <div style="flex:1;">
+                 Issues 
+              </div>
+              <div style="flex:1;">
+                 <button id="cis"  class="btn btn-danger" > Clear Issues </button>
+              </div>
+            </div>
+            <div id="isr" >
+            </div>
+        </div>
         <div>
             <div> Table </div>
             <table style="width:100%">
@@ -185,6 +196,10 @@
                     $("#fr").val(null);
                     $("#to").val(null);
                     $("#mt").val(null);
+                 }
+                 else
+                 {
+                   
                  }
                }
             });
