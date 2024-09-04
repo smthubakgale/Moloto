@@ -153,7 +153,16 @@
         };
         
         wb.SheetNames.push("Test Sheet");
-        var ws_data = [["Name", "Age", "Gender"], ["John", 25, "Male"], ["Jane", 30, "Female"]];
+        var ws_data = [["Start_Time", "End_Time", "Metal"]];
+
+          $("table .fin tr").toArray().forEach((s)=>
+            {
+              var f = $(s);
+              ws_data.push([ $(f.find("td")[0]).html().trim().replace(" ","T") , 
+                            $(f.find("td")[1]).html().trim().replace(" ","T") ,
+                            $(f.find("td")[2]).html() ]);
+            });
+          
         var ws = XLSX.utils.aoa_to_sheet(ws_data);
         wb.Sheets["Test Sheet"] = ws;
 
@@ -166,7 +175,7 @@
                 return buf;
                 
         }
-          //saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'test.xlsx');
+          saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'test.xlsx');
           // Create a link to download the file
 const link = document.createElement("a");
 link.href = URL.createObjectURL(new Blob([s2ab(wbout)], {type: "application/octet-stream"}));
