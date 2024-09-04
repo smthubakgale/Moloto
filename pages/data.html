@@ -169,9 +169,9 @@
         window["update_row"] = function(ts)
         {
               var f = $(ts).parent().parent();
-              $("#fr").val(f.find("td")[0]).html().trim().replace(" ","T"));
-              $("#to").val(f.find("td")[1]).html().trim().replace(" ","T"));
-              $("#mt").val(f.find("td")[2]).html());
+              $("#fr").val($(f.find("td")[0]).html().trim().replace(" ","T"));
+              $("#to").val($(f.find("td")[1]).html().trim().replace(" ","T"));
+              $("#mt").val($(f.find("td")[2]).html());
           
         }
     });
