@@ -13,23 +13,43 @@
   <main> 
 
    <section>
+      <div> Experimental Results </div>
       <div>
-        <div>
-          Form 
-        </div>
+        <div> Form  </div>
         <div>
           <div style="display:flex;">
              <div style="flex:1;">
-               <label> From </label>
-               <input type="datetime-local" />
+               <label> Start Time </label>
+               <input id="fr" type="datetime-local" />
              </div>
              <div style="flex:1;">
-               <label> To </label>
-               <input type="datetime-local" />
+               <label> End Time </label>
+               <input id="to" type="datetime-local" />
              </div>
           </div>
           <label> Metal </label>
-          <input type="text" //>
+          <input id="mt" type="text" //>
+        </div>
+        <div style="display:flex;">
+          <div style="flex:1;">
+             <button id="cr" > Create </button>
+          </div>
+          <div style="flex:1;">
+            
+          </div>
+        </div>
+
+        <div>
+            <div> Table </div>
+            <table>
+              <tbody>
+                <tr>
+                  <th> Start Time </th>
+                  <th> End Time </th>
+                  <th> Metal </th>
+                </tr>
+              </tbody>
+            </table>
         </div>
       </div>
    </section>
