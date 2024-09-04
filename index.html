@@ -173,6 +173,10 @@
              }
            
          }
+         window["clear_csv"] = function()
+         { 
+             $("#csv").val(null);
+         }
          window["import_csv"] = function(cb)
          {
              init_csv();
