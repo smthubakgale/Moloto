@@ -179,6 +179,42 @@
              cb1 = cb;
              $("#csv").click();
          }
+         window["load_csv"] = function()
+         {
+            if(document.getElementById("csv").files.length == 0)
+            {
+                alert("import data first");
+            }
+           else
+            {
+                const file = document.getElementById("csv").files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Get the binary data
+                    const data = e.target.result;
+                
+                    // Convert the data to a workbook
+                    const workbook = XLSX.read(data, {type: "binary"});
+                
+                    // Get the first sheet
+                    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                
+                    // Convert the sheet to JSON
+                    const jsonData = XLSX.utils.sheet_to_json(sheet);
+                
+                    // Do something with the JSON data 
+
+                    if(cb1)
+                    {
+                      cb1(jsonData);
+                      cb1 = null;
+                    }
+                };
+                
+                // Read the data as binary
+                reader.readAsBinaryString(file);
+           }
+         }
  
        });
     </script>
