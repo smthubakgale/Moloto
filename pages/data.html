@@ -85,7 +85,7 @@
             <div style="flex:1;">
                <button id="cr" class="btn btn-primary" > Create </button>
             </div>
-            <div style="flex:1;">
+            <div id="cr2" style="flex:1;">
               
             </div>
           </div>
@@ -153,17 +153,15 @@
               $(f.find("td")[4]).html(b2);
  
               fin.append(f);
+                  alert("Created Successfully");
             }
         });
         window["delete_row"] = function(ts)
         {
            if(confirm("Are you sure you want to delete row"))
            {
-              var tr = $(ts).parent().parent();
-
-             console.log(tr[0]);
-
-             tr.remove();
+              var tr = $(ts).parent().parent(); 
+              tr.remove();
            }
         }
         window["update_row"] = function(ts)
@@ -172,7 +170,30 @@
               $("#fr").val($(f.find("td")[0]).html().trim().replace(" ","T"));
               $("#to").val($(f.find("td")[1]).html().trim().replace(" ","T"));
               $("#mt").val($(f.find("td")[2]).html());
-          
+
+              var b1 = $("<button/>").addClass("btn").addClass("btn-success").html("Update");
+              b1.on("click" , function()
+              {
+                  $("#cr").css("display" , "block");
+                  var fr = $("#fr").val();
+                  var to = $("#to").val();
+                  var mt = $("#mt").val();
+      
+                  if(fr =="" || fr == null){ alert("Start Time required"); }
+                  else if(to =="" || to == null){ alert("End Time required"); }
+                  else if(mt =="" || mt == null){ alert("Metal required"); }
+                  else{ 
+         
+                    $(f.find("td")[0]).html(fr.replace("T" , " "));
+                    $(f.find("td")[1]).html(to.replace("T" , " "));
+                    $(f.find("td")[2]).html(mt); 
+                  }
+                  b1.remove();
+                  alert("Üpdated Successfully");
+              });
+
+             $("#cr2").html(b1);
+             $("#cr").css("display" , "confirm");
         }
     });
   </script>
