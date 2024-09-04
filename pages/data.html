@@ -157,9 +157,13 @@
         });
         window["delete_row"] = function(ts)
         {
-           if(confirm("Are you sure you want \n to delete row"))
+           if(confirm("Are you sure you want to delete row"))
            {
-             
+              var tr = $(ts).parent().parent();
+
+             console.log(tr[0]);
+
+             tr.remove();
            }
         }
         window["update_row"] = function(ts)
