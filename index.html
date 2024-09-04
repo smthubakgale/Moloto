@@ -95,11 +95,10 @@
             <div style="flex:1;"></div>
             <div ref="pages/data.html" class="itm">
               Data
-            </div>
-            <div> 
-            </div>
-            <div> 
-            </div>
+            </div>  
+            <div ref="pages/model.html" class="itm">
+              Model
+            </div>  
             <div ref="pages/api.html" class="itm">
               API
             </div>
@@ -179,10 +178,6 @@
              init_csv();
              cb1 = cb;
              $("#csv").click();
-         }
-         window["export_csv"] = function(json , cb)
-         {
-              init_csv();
          }
  
        });
