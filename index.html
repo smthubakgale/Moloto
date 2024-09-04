@@ -104,7 +104,7 @@
             </div>
             <div style="width:20px;" ></div>
           </div>
-          <div style="flex:1;" >
+          <div style="flex:1;" > 
             <iframe class="bod" src="pages/data.html" ></iframe>
           </div>
         </div>
@@ -132,6 +132,24 @@
             var p = $(ts).attr("ref");
             console.log(p);
             $(".bod").attr("src", p);
+         }
+         function init_csv()
+         {
+             if($("#csv").length == 0)
+             {
+                 var np = $("<input/>").css("display","none");
+               
+                 $("body").append(np); 
+             }
+           
+         }
+         window["import_csv"] = function(cb)
+         {
+             init_csv();
+         }
+         window["export_csv"] = function(json , cb)
+         {
+              init_csv();
          }
  
        });
