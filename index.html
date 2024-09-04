@@ -140,7 +140,36 @@
              {
                  var np = $("<input/>").css("display","none").attr("type" , "file").attr("id","csv")
                          .attr("accept" , ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel");
-               
+                 np.on("change" , function()
+                 {
+                    const file = document.getElementById("csv").files[0];
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Get the binary data
+                        const data = e.target.result;
+                    
+                        // Convert the data to a workbook
+                        const workbook = XLSX.read(data, {type: "binary"});
+                    
+                        // Get the first sheet
+                        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                    
+                        // Convert the sheet to JSON
+                        const jsonData = XLSX.utils.sheet_to_json(sheet);
+                    
+                        // Do something with the JSON data
+                        console.log(jsonData);
+
+                        if(cb1)
+                        {
+                          cb1(jsonData);
+                          cb1 = null;
+                        }
+                    };
+                    
+                    // Read the data as binary
+                    reader.readAsBinaryString(file);
+                 });
                  $("body").append(np); 
              }
            
