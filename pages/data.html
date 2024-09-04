@@ -159,14 +159,15 @@
     {
         $("#cis").on("click" , function()
         {
-          $("#isr").html("");
+            $("#isr").html("");
         });
       
         $("#imp").on("click" , function()
         {
             window.parent.import_csv(function(json)
             {
-               console.log(json , Array.isArray(json));
+               $("#isr").html("");
+              
                if(Array.isArray(json))
                {
                   var fin = $("table .fin");
