@@ -153,6 +153,11 @@
               $(f.find("td")[4]).html(b2);
  
               fin.append(f); 
+              
+              $("#fr").val(null);
+              $("#to").val(null);
+              $("#mt").val(null);
+              
               setTimeout(function(){
                 alert("Created Successfully");
               } , 600);
@@ -191,6 +196,10 @@
                     $(f.find("td")[2]).html(mt); 
                   }
                   b1.remove();
+                  $("#fr").val(null);
+                  $("#to").val(null);
+                  $("#mt").val(null);
+                
                   setTimeout(function(){
                      alert("Üpdated Successfully");
                   } , 600);
