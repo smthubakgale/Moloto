@@ -139,7 +139,9 @@
             else{
               var f = $("table .design tr").clone();
               f.find("td").html("");
-              $(f.find("td")[0]).html(fr);
+              $(f.find("td")[0]).html(fr.replace("T" , " "));
+              $(f.find("td")[1]).html(to.replace("T" , " "));
+              $(f.find("td")[2]).html(mt);
               var fin = $("table .fin");
               fin.append(f);
             }
