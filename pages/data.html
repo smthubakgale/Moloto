@@ -152,8 +152,10 @@
               $(f.find("td")[3]).html(b1);
               $(f.find("td")[4]).html(b2);
  
-              fin.append(f);
-                  alert("Created Successfully");
+              fin.append(f); 
+              setTimeout(function(){
+                alert("Created Successfully");
+              } , 600);
             }
         });
         window["delete_row"] = function(ts)
@@ -189,11 +191,13 @@
                     $(f.find("td")[2]).html(mt); 
                   }
                   b1.remove();
-                  alert("Üpdated Successfully");
+                  setTimeout(function(){
+                     alert("Üpdated Successfully");
+                  } , 600);
               });
 
              $("#cr2").html(b1);
-             $("#cr").css("display" , "confirm");
+             $("#cr").css("display" , "none");
         }
     });
   </script>
