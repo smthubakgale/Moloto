@@ -285,7 +285,7 @@
                  var dt = new Date(s.created_at);
                  dt.setHours(dt.getHours() + 2);
                  
-                 var st = `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())} `
+                 var st = `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())} T `
                  + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
                  
                  rr += `<tr>
@@ -307,8 +307,7 @@
            var voltage = $("#voltage").val();
            var ur = "https://api.thingspeak.com/update?api_key="+ writeKey+"&field1="+ current +"&field2=" + voltage;
            fetch(ur).then((r)=>
-             {
-                console.log(r.status)
+             { 
                 if(r.status == 200){
                   alert("Success");
                 }
