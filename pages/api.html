@@ -278,10 +278,18 @@
               </tr/>
               `;
 
+             const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
+ 
              d.feeds.forEach((s)=>
                {
+                 var dt = new Date(s.created_at);
+                 dt.setHours(dt.getHours() + 2);
+                 
+                 var st = `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())} `
+                 + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
+                 
                  rr += `<tr>
-                 <td> `+ s.created_at + ` </td>
+                 <td> `+ st + ` </td>
                  <td> `+ s.field1 + ` </td>
                  <td> `+ s.field2 + ` </td>
                  </tr>`;
