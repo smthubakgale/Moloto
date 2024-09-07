@@ -195,12 +195,12 @@
            var qn = true;
 
            try{
-             cn = (document.getElementById("csv").files == null || document.getElementById("csv").files.length == 0);
+             qn = (document.getElementById("csv").files == null || document.getElementById("csv").files.length == 0);
            }
            catch{
              qn = false;
            }
-            if(qn)
+            if(qn == false)
             {
                 alert("import data first");
             }
