@@ -195,7 +195,7 @@
            var qn = true;
 
            try{
-             qn = (document.getElementById("csv").files == null || document.getElementById("csv").files.length == 0);
+             qn = (document.getElementById("csv").files != null && document.getElementById("csv").files.length != 0);
            }
            catch{
              qn = false;
