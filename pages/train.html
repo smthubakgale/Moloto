@@ -118,11 +118,22 @@
                  }
                  else
                  {
-                     json.forEach((s , k)=>
+                     run(json , 0 , json.length);
+                     function run(json , k , max)
                      {
-                        var fr = s.Start_Time;
-                        var to = s.End_Time;
-                        var mt = s.Metal;});
+                         if(k < max)
+                         {
+                             var s = json[k];
+                           
+                             var fr = s.Start_Time;
+                             var to = s.End_Time;
+                             var mt = s.Metal;
+                         }
+                         else
+                         {
+                           
+                         }
+                     }
                  }
                }
 
