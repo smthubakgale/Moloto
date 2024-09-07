@@ -78,13 +78,14 @@
         <div>
             <button id="dts" class="btn btn-primary" > Generate Dataset </button>
         </div>
+        <div id="prog" style="width:20px; text-align:center;"></div>
       </div>
       <div>
           <div style="display:flex;"> 
             <div style="flex:1;">
                <h4><b>Issues </b></h4>
             </div>
-            <div style="flex:1;">
+            <div style="">
                <button id="cis"  class="btn btn-danger" > Clear Issues </button>
             </div>
           </div>
@@ -93,6 +94,9 @@
          <br/>
       </div>
     
+        <div id="get"></div>
+        <div style="height:50vh"></div>
+    
   </main>
   <script>
     var readKey = window.parent.readKey;
@@ -100,7 +104,7 @@
     var rdC = -1;
     var outs = [];
     
-    $("#sum").on("click" , function()
+    $("#dts").on("click" , function()
     {
         $("#cis").on("click" , function()
         {
@@ -145,6 +149,8 @@
                      run(json , 0 , json.length);
                      function run(json , k , max)
                      {
+                         $("#prog").html((100*k/max)+" %");
+                       
                          if(k < max)
                          {
                              var s = json[k];
@@ -210,12 +216,22 @@
                                  
                                   var st = `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())}T`
                                   + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
-                                 
+
+                                   var id ;
+                                   outs.forEach((s2)=>
+                                     {
+                                        if(s2.Metal == mt)
+                                        {
+                                          id = s2.id
+                                        }
+                                     });
+                                  
                                   dts.push({
                                     Date : st ,
                                     Current: s.field1 ,
                                     Voltage: s.fiend2 ,
-                                    Metal : mt 
+                                    Metal : mt ,
+                                    id : id 
                                   }); 
                                  
                                 });
@@ -225,6 +241,31 @@
                          }
                          else
                          {
+                           var rr = `<table style="width:100%; margin-top:10px; margin-bottom:10px;">
+                           <tr>
+                               <th> Date </th>
+                               <th> ID </th>
+                               <th> Metal </th>
+                               <th> Current </th>
+                               <th> Voltage </th>
+                            </tr/>
+                            `;
+
+                            dts.forEach((s)=>
+                            {
+                               rr += `<tr> 
+                               <td> `+ s.Date + ` </td>
+                               <td> `+ s.ID + ` </td>
+                               <td> `+ s.Metal + ` </td>
+                               <td> `+ s.Current + ` </td>
+                               <td> `+ s.Voltage + ` </td>
+                               </tr>`;
+                            });
+
+                           
+                           rr += "</table>";
+              
+                           $("#get").html(rr);
                            
                          }
                      }
