@@ -12,12 +12,30 @@
 </head>   
 
 <body>
-<style> 
 
+<style> 
+    body{
+      margin:20px;
+    }
 </style>
 
   <main> 
-    Home 
+
+      <div style="display:flex;">
+        <div style="flex:1;"></div>
+        <div>
+            <button id="dts" class="btn btn-primary" > Generate Dataset </button>
+        </div>
+      </div>
   </main>
+  <script>
+    $("#sum").on("click" , function()
+    {
+        window.parent.load_csv(function(json)
+        {
+             alert(json);
+        });
+    });
+  </script>
 </body>
 </html>
