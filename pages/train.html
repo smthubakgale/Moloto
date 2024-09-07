@@ -95,6 +95,10 @@
     
   </main>
   <script>
+    var readKey = window.parent.readKey;
+    var channel_Id = window.parent.channel_Id;
+    var rdC = -1;
+    
     $("#sum").on("click" , function()
     {
         $("#cis").on("click" , function()
@@ -125,9 +129,57 @@
                          {
                              var s = json[k];
                            
-                             var fr = s.Start_Time;
-                             var to = s.End_Time;
+                             var s1 = s.Start_Time;
+                             var s2 = s.End_Time;
                              var mt = s.Metal;
+
+                              var ur = "https://api.thingspeak.com/channels/"+ channel_Id + "/feeds.json?api_key=" + readKey ;
+                       
+                              if(rdC > 0)
+                              {
+                                 ur += "&results=" + rdC; 
+                              }
+  
+                             console.log(s1 , s2);
+  
+                              if(s1 != null && s2 != null)
+                              {
+                                 s1 = new Date(s1);
+                                 s1.setHours(s1.getHours() - 2);
+                                 s2 = new Date(s2);
+                                 s2.setHours(s2.getHours() - 2);
+                    
+                                 //console.log(s1 , s2); 
+                    
+                                 s1 = tq(s1);
+                                 s2 = tq(s2);
+                    
+                                 //console.log(s1 , s2); 
+                    
+                                 ur += "&start=" + s1;
+                                 ur += "&end=" + s2;
+                                
+                                 function tq(ms){
+                                   var dt = ms;
+                                   const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
+                    
+                                   return `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())}%20`
+                                         + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
+                                 }
+                              }
+                            fetch(ur).then((r)=>
+                           { 
+                              if(r.status == 200)
+                              {
+                                return r.text();
+                              }
+                             else{
+                               
+                             }
+                           }).then((t)=>
+                             {
+                                var d = JSON.parse(t);
+                             });
                          }
                          else
                          {
