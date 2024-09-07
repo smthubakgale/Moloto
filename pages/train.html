@@ -27,10 +27,29 @@
             <button id="dts" class="btn btn-primary" > Generate Dataset </button>
         </div>
       </div>
+      <div>
+          <div style="display:flex;"> 
+            <div style="flex:1;">
+               <h4><b>Issues </b></h4>
+            </div>
+            <div style="flex:1;">
+               <button id="cis"  class="btn btn-danger" > Clear Issues </button>
+            </div>
+          </div>
+          <div id="isr" >
+          </div>
+         <br/>
+      </div>
+    
   </main>
   <script>
     $("#sum").on("click" , function()
     {
+        $("#cis").on("click" , function()
+        {
+            $("#isr").html("");
+        });
+      
         window.parent.load_csv(function(json)
         {
              alert(json);
