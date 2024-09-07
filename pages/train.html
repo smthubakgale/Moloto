@@ -200,7 +200,25 @@
                            }).then((t)=>
                              {
                                 var d = JSON.parse(t);
-
+                               
+                                const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
+  
+                                d.feeds.forEach((s)=>
+                                {
+                                  var dt = new Date(s.created_at);
+                                  dt.setHours(dt.getHours() + 0);
+                                 
+                                  var st = `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())}T`
+                                  + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
+                                 
+                                  dts.push({
+                                    Date : st ,
+                                    Current: s.field1 ,
+                                    Voltage: s.fiend2 ,
+                                    Metal : mt 
+                                  }); 
+                                 
+                                });
                                 
                                 run(json , k + 1 , max);
                              });
