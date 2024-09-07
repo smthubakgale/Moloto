@@ -191,7 +191,16 @@
          }
          window["load_csv"] = function()
          {
-            if(document.getElementById("csv").files == null || document.getElementById("csv").files.length == 0)
+
+           var qn = true;
+
+           try{
+             cn = (document.getElementById("csv").files == null || document.getElementById("csv").files.length == 0);
+           }
+           catch{
+             qn = false;
+           }
+            if(qn)
             {
                 alert("import data first");
             }
