@@ -191,7 +191,7 @@
          }
          window["load_csv"] = function()
          {
-            if(document.getElementById("csv").files.length == 0)
+            if(document.getElementById("csv").files == null || document.getElementById("csv").files.length == 0)
             {
                 alert("import data first");
             }
