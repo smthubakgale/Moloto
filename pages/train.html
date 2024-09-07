@@ -53,6 +53,43 @@
         window.parent.load_csv(function(json)
         {
              alert(json);
+          
+               $("#isr").html("");
+              
+               if(Array.isArray(json))
+               {
+                  var fin = $("table .fin");
+                  var log = [];
+                 if(json.length == 0)
+                 {
+                      log.push("Spreadsheet is Empty");
+                 }
+                 else
+                 {
+                     json.forEach((s , k)=>
+                     {
+                        var fr = s.Start_Time;
+                        var to = s.End_Time;
+                        var mt = s.Metal;});
+                 }
+               }
+
+                 console.log(log);
+
+                 if(log.length == 0)
+                 { 
+                    $("#fr").val(null);
+                    $("#to").val(null);
+                    $("#mt").val(null);
+                 }
+                 else
+                 {
+                    window.parent.clear_csv();
+                    log.forEach((s)=>
+                    {
+                        $("#isr").append($("<div/>").addClass("c").html(s));
+                    });
+                 }
         });
     });
   </script>
