@@ -227,11 +227,10 @@
                     const jsonData = XLSX.utils.sheet_to_json(sheet);
                 
                     // Do something with the JSON data 
-
-                    if(cb1)
+                    console.log(jsonData);
+                    if(cb)
                     {
-                      cb1(jsonData);
-                      cb1 = null;
+                      cb(jsonData);
                     }
                 };
                 
