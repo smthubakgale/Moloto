@@ -167,7 +167,7 @@
               const url = URL.createObjectURL(blob);
               
                console.log(url);
-              await tf.models.modelFromJSON(myModelJSON);
+              await tf.models.modelFromJSON({});
               tf.loadLayersModel(url).then((md)=>
                {
                  model = md;
