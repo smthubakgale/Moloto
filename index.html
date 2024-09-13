@@ -139,6 +139,34 @@
             console.log(p);
             $(".bod").attr("src", p);
          }
+         var cb2;
+         function init_weights()
+         {
+             if($("#wgs").length == 0)
+             {
+                 var np = $("<input/>").css("display","none").attr("type" , "file").attr("id","wgs")
+                         .attr("accept" , ".json");
+                 np.on("change" , function()
+                 {
+                    const file = document.getElementById("csv").files[0];
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Get the binary data 
+                        const data = e.target.result; 
+                        if(cb2)
+                        {
+                          cb2(data);
+                          cb2 = null;
+                        }
+                    };
+                    
+                    // Read the data as binary
+                    reader.readAsDataURL(file);
+                 });
+                 $("body").append(np); 
+             }
+           
+         };
          var cb1;
          function init_csv()
          {
@@ -179,9 +207,19 @@
              }
            
          };
+         window["clear_weights"] = function()
+         { 
+             $("#wgs").val(null);
+         };
          window["clear_csv"] = function()
          { 
              $("#csv").val(null);
+         };
+         window["import_weights"] = function(cb)
+         {
+             init_weights();
+             cb2 = cb;
+             $("#wgs").click();
          };
          window["import_csv"] = function(cb)
          {
@@ -191,8 +229,8 @@
          };
          window["get_csv"] = function(cb)
          {
-
-           var qn = true;
+            cb1 = cb;
+            var qn = true;
 
            try{
              qn = (document.getElementById("csv").files != null && document.getElementById("csv").files.length != 0);
@@ -235,6 +273,41 @@
                 
                 // Read the data as binary
                 reader.readAsBinaryString(file);
+           }
+         };
+         window["get_weights"] = function(cb)
+         {
+            cb2 = cb;
+            var qn = true;
+
+           try{
+             qn = (document.getElementById("wgs").files != null && document.getElementById("wgs").files.length != 0);
+           }
+           catch{
+             qn = false;
+           }
+            if(qn == false)
+            {
+                window["import_weights"](function(json)
+                {
+                    window["get_weights"](cb);
+                })
+            }
+           else
+            {
+                const file = document.getElementById("wgs").files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Get the binary data
+                    const data = e.target.result;
+                    if(cb)
+                    {
+                      cb(data);
+                    }
+                };
+                
+                // Read the data as binary
+                reader.readAsDataURL(file);
            }
          };
  
