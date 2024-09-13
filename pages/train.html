@@ -80,7 +80,7 @@
             <button id="dts" class="btn btn-primary" > Generate Dataset </button>
         </div>
         <div>
-            <button id="tts" class="btn btn-primary" > Train Dataset </button>
+            <button id="tts" class="btn btn-warning" > Train Dataset </button>
         </div>
       </div>
     <br/>
@@ -110,8 +110,32 @@
         var channel_Id = window.parent.channel_Id;
         var rdC = -1;
         var outs = [];
-        var dts = [];
+        var dts = []; 
         
+        $("#tts").on("click" , function()
+        {
+             nex(0)
+             function nex(kr)
+             {
+                 if(dts.length == 0)
+                 { 
+                    if(kr == 0)
+                    {
+                       $("#dts").click(); 
+                       nex(1)
+                    }
+                    else{
+                      alert("dataset cannot be empty");
+                    }
+                 }
+                else
+                {
+                   
+                }
+             }
+            
+        });
+      
         $("#dts").on("click" , function()
         {
             $("#cis").on("click" , function()
