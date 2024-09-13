@@ -140,9 +140,9 @@
       });
       
       model.compile({
-        optimizer: 'sgd',
-        loss: 'categoricalCrossentropy',
-        metrics: ['accuracy']
+        optimizer: tf.train.adam(),
+        loss: tf.losses.meanSquaredError,
+        metrics: ['mse'],
       });
 
       function onBatchEnd(batch, logs) {
