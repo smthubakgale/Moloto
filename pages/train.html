@@ -139,12 +139,22 @@
             window.parent.import_weights(function(url)
             {
                console.log(url);
-               tf.loadLayersModel(url).then((md)=>
-                 {
-                   model = md;
-                   console.log(typeof(model));
-                   alert("Weights Imported Successfully");
-                 });
+              fetch(url)
+              .then(res => res.blob())
+              .then((b)=>
+                {
+                    const blobUrl = URL.createObjectURL(blob);
+                    console.log(blobUrl);
+ 
+                    tf.loadLayersModel(blobUrl).then((md)=>
+                     {
+                       model = md;
+                       console.log(typeof(model));
+                       alert("Weights Imported Successfully");
+                     });
+                  
+                })
+                    
             });
         });
       
