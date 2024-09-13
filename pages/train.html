@@ -140,7 +140,7 @@
        ]
       });
 
-      model.summary();
+      tfvis.show.modelSummary({name: 'Model Summary'}, model);
       
       model.compile({
         optimizer: tf.train.adam(),
