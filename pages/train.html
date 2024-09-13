@@ -132,6 +132,32 @@
       console.log(data);
       console.log(labels);
 
+      const model = tf.sequential({
+       layers: [
+         tf.layers.dense({inputShape: [2], units: 32, activation: 'relu'}),
+         tf.layers.dense({units: 10, activation: 'softmax'}),
+       ]
+      });
+      
+      model.compile({
+        optimizer: 'sgd',
+        loss: 'categoricalCrossentropy',
+        metrics: ['accuracy']
+      });
+
+      function onBatchEnd(batch, logs) {
+        console.log('Accuracy', logs.acc);
+      }
+
+      // Train for 5 epochs with batch size of 32.
+      model.fit(data, labels, {
+         epochs: 5,
+         batchSize: 32,
+         callbacks: {onBatchEnd}
+       }).then(info => {
+         console.log('Final accuracy', info.history.acc);
+       });
+      
         $("#exw").on("click" ,  function()
         {
             if(model != null)
