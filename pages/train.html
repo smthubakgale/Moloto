@@ -127,15 +127,15 @@
         var w_file; 
 
       var data = tf.tensor2d([ [2,2] , [4,2] , [3,5] , [3,2] , [2,5] ] , [5 , 2]);
-      var labels = tf.tensor2d([1,1,1,1,10] , [5, 2]);
+      var labels = tf.tensor2d([1,1,1,1,10] , [5, 1]);
 
       console.log(data);
       console.log(labels);
 
       var model = tf.sequential({
        layers: [
-         tf.layers.dense({inputShape: [2], units: 32, activation: 'relu'}),
-         tf.layers.dense({inputshape:[1] , units:2 , activation: 'softmax'}),
+         tf.layers.dense({inputShape: [2], activation: 'relu'}),
+         tf.layers.dense({inputshape:[1] ,  activation: 'softmax'}),
        ]
       });
       
