@@ -136,7 +136,10 @@
       
         $("#imw").on("click" , function()
         {
-           
+            window.parent.import_weights(function(url)
+            {
+               console.log(url);
+            });
         });
       
         $("#tts").on("click" , function()
