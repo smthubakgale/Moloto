@@ -36,14 +36,14 @@ function fromMatrix(mt)
         if(eq(s,[2,8]){ a = "r"; }
         if(eq(s,[2,9]){ a = "s"; }
         if(eq(s,[3,0]){ a = "t"; }
-        if(eq(s,[0,0]){ a = "u"; }
-        if(eq(s,[0,0]){ a = "v"; }
-        if(eq(s,[0,0]){ a = "w"; }
-        if(eq(s,[0,0]){ a = "x"; }
-        if(eq(s,[0,0]){ a = "y"; }
-        if(eq(s,[0,0]){ a = "z"; }
-        if(eq(s,[0,0]){ a = "_"; }
-        if(eq(s,[0,0]){ a = "."; }
+        if(eq(s,[3,1]){ a = "u"; }
+        if(eq(s,[3,2]){ a = "v"; }
+        if(eq(s,[3,3]){ a = "w"; }
+        if(eq(s,[3,4]){ a = "x"; }
+        if(eq(s,[3,5]){ a = "y"; }
+        if(eq(s,[3,6]){ a = "z"; }
+        if(eq(s,[3,7]){ a = "_"; }
+        if(eq(s,[3,8]){ a = "."; }
 
         ret += a;
     });
