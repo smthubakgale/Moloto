@@ -67,24 +67,15 @@ function toMatrix(str)
     }
 }
 
-function createModel() {
-  // Create a sequential model
-  const model = tf.sequential();
-
-  //;
-  var inp = tf.layers.dense({
-    units:2,
-    inputDim: [2], 
-    activation:"sigmoid"
-  });
-  var out = tf.layers.dense({
-    units: 1,
-    activation:"softmax"
-  });
-  //  
-  model.add(inp); 
-  model.add(out);
-  //:
+function createModel() 
+{
+  var model = tf.sequential({
+       layers: [
+         tf.layers.dense({inputShape: [2,40], units:1 , activation: 'relu'}),    // input size [n ,2 ,40] -> shape [2,40] => [2 , 40*1] => [batch , 2 , 40]
+         tf.layers.flatten() ,                                                   // flatten -> [batch , 2*40 ] => [ batch , 80] 
+         tf.layers.dense({inputshape:[40] , units:1 ,  activation: 'softmax'}),   // output shape [n, 40 ] -> shape [40] => [40*1] => [batch , 40]
+       ]
+      });
 
   return model;
 }
