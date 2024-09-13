@@ -40,7 +40,7 @@
                    tf.layers.dense({inputShape: [2,40], units:32 , activation: 'relu'}),   
                    // flatten [batch , 2 , 1] -> [batch , 2*1 ] => outputshape [batch , 2] 
                    tf.layers.flatten() ,      
-                   // input size [n , 1]    -> inputShape [1]
+                   // input size [n , 40]    -> inputShape [40]
                   //  units : 1             -> output shape [batch, 1 ]  
                    tf.layers.dense({inputshape:[40] , units:1 ,  activation: 'softmax'}),   > [batch , 40]
                  ]
