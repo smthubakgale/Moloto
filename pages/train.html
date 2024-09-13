@@ -136,24 +136,46 @@
       
         $("#imw").on("click" , function()
         {
-            window.parent.import_weights(function(url)
+             function base64ToBlob(base64, contentType = "",
+                sliceSize = 512) {
+                const byteCharacters = atob(base64.split(",")[1]);
+                const byteArrays = [];
+            
+                for (let offset = 0; offset < byteCharacters.length;
+                    offset += sliceSize) {
+                    const slice = byteCharacters.slice(
+                        offset, offset + sliceSize);
+            
+                    const byteNumbers = new Array(slice.length);
+                    for (let i = 0; i < slice.length; i++) {
+                        byteNumbers[i] = slice.charCodeAt(i);
+                    }
+            
+                    const byteArray = new Uint8Array(byteNumbers);
+                    byteArrays.push(byteArray);
+                }
+            
+                const blob = new Blob(byteArrays, { type: contentType });
+                return blob;
+            }
+            window.parent.import_weights(function(base64String)
             {
+              // Convert the Base64 string to a Blob
+              const blob = base64ToBlob(base64String, "application/json");
+              
+              // Create a URL for the Blob and make it downloadable
+              const url = URL.createObjectURL(blob);
+              
                console.log(url);
-              fetch(url)
-              .then(res => res.blob())
-              .then((blob)=>
-                {
-                    const blobUrl = URL.createObjectURL(blob);
-                    console.log(blobUrl);
- 
-                    tf.loadLayersModel(blobUrl).then((md)=>
-                     {
-                       model = md;
-                       console.log(typeof(model));
-                       alert("Weights Imported Successfully");
-                     });
+              
+              tf.loadLayersModel(blobUrl).then((md)=>
+               {
+                 model = md;
+                 console.log(typeof(model));
+                 alert("Weights Imported Successfully");
+               });
                   
-                })
+              //fetch(url) .then(res => res.blob()) 
                     
             });
         });
