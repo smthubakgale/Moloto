@@ -74,6 +74,12 @@
   <main> 
 
       <div style="display:flex;">
+        <div>
+            <button id="imw" class="btn btn-info" > Import Weights </button>
+        </div>
+        <div style="margin-left:10px;">
+            <button id="exw" class="btn btn-success" > Save Weights </button>
+        </div>
         <div style="flex:1;"></div>
         <div id="prog" style="width:60px; text-align:center; padding:5px; font-weight:500;"></div>
         <div>
@@ -111,7 +117,28 @@
         var rdC = -1;
         var outs = [];
         var dts = []; 
-        
+        var model;
+
+        $("#exw").on("click" ,  function()
+        {
+            if(model != null)
+            {
+                 model.save('downloads://hevo').then(()=>
+                 {
+                    alert("Weights Saved Successfully");
+                 });
+            }
+            else
+            {
+                alert("No Trained Model exists");
+            }
+        });
+      
+        $("#imw").on("click" , function()
+        {
+           
+        });
+      
         $("#tts").on("click" , function()
         {
              nex(0)
@@ -145,11 +172,13 @@
                    console.log(xs);
                    console.log(ys);
 
-                   const model = createModel();
-                   model.save('downloads://my-model').then(()=>
+                   if(model == null)
                    {
-                       
-                   })
+                        alert("creating untrained model");
+                        model = createModel();
+                   }
+                   
+                   
                 }
              }
             
