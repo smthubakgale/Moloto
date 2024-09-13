@@ -126,13 +126,13 @@
         var m_file;
         var w_file; 
 
-      const data = tf.randomNormal([10, 2]);
-      const labels = tf.randomUniform([10, 1]);
+      var data = tf.randomNormal([10, 2]);
+      var labels = tf.randomUniform([10, 1]);
 
       console.log(data);
       console.log(labels);
 
-      const model = tf.sequential({
+      var model = tf.sequential({
        layers: [
          tf.layers.dense({inputShape: [2], units: 32, activation: 'relu'}),
          tf.layers.dense({units: 10, activation: 'softmax'}),
