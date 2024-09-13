@@ -136,12 +136,16 @@
       
         $("#imw").on("click" , function()
         {
-            window.parent.import_weights(function(file)
+            window.parent.import_weights(function(w_file)
             {
-               tf.loadLayersModel(tf.io.browserFiles([file])).then((md)=>
-               {
-                  alert("A"); 
-               })
+               window.parent.import_model(function(m_file)
+              {
+                 tf.loadLayersModel(tf.io.browserFiles([m_file , w_file])).then((md)=>
+                 {
+                    alert("A"); 
+                 })
+                      
+              });
                     
             });
         });
