@@ -197,7 +197,8 @@
            try{
              qn = (document.getElementById("csv").files != null && document.getElementById("csv").files.length != 0);
            }
-           catch{
+           catch(e){
+             console.error(e);
              qn = false;
            }
             if(qn == false)
