@@ -139,13 +139,30 @@
             console.log(p);
             $(".bod").attr("src", p);
          }
+         var cb3;
+         function init_model()
+         {
+             if($("#mds").length == 0)
+             {
+                 var np = $("<input/>").css("display","none").attr("type" , "file").attr("id","mds")
+                         .attr("accept" , ".json");
+                 np.on("change" , function()
+                 {
+                    const file = document.getElementById("mds").files[0];
+                    cb3(file);
+                    cb3 = null;
+                 });
+                 $("body").append(np); 
+             }
+           
+         };
          var cb2;
          function init_weights()
          {
              if($("#wgs").length == 0)
              {
                  var np = $("<input/>").css("display","none").attr("type" , "file").attr("id","wgs")
-                         .attr("accept" , ".json");
+                         .attr("accept" , ".bin");
                  np.on("change" , function()
                  {
                     const file = document.getElementById("wgs").files[0];
@@ -203,6 +220,12 @@
          window["clear_csv"] = function()
          { 
              $("#csv").val(null);
+         };
+         window["import_model"] = function(cb)
+         {
+             init_model();
+             cb3 = cb;
+             $("#mds").click();
          };
          window["import_weights"] = function(cb)
          {
@@ -285,6 +308,30 @@
            else
             {
                 const file = document.getElementById("wgs").files[0]; 
+                cb(file);  
+           }
+         };
+         window["get_model"] = function(cb)
+         {
+            cb3 = cb;
+            var qn = true;
+
+           try{
+             qn = (document.getElementById("mds").files != null && document.getElementById("mds").files.length != 0);
+           }
+           catch{
+             qn = false;
+           }
+            if(qn == false)
+            {
+                window["import_model"](function(json)
+                {
+                    window["get_model"](cb);
+                })
+            }
+           else
+            {
+                const file = document.getElementById("mds").files[0]; 
                 cb(file);  
            }
          };
