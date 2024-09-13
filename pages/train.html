@@ -77,10 +77,10 @@
         <div>
             <button id="imw" class="btn btn-info" > Import Weights </button>
         </div>
-        <div>
+        <div style="margin-left:10px;">
             <button id="imm" class="btn btn-warning" > Import Structure </button>
         </div>
-        <div>
+        <div style="margin-left:10px;">
             <button id="imc" class="btn btn-info" > Import Model </button>
         </div>
         <div style="margin-left:10px;">
@@ -150,7 +150,8 @@
                 {
                      tf.loadLayersModel(tf.io.browserFiles([m_file , w_file])).then((md)=>
                      {
-                         alert("A"); 
+                         alert("Model Uploaded Successfully"); 
+                         model = md;
                      })  
                 });
             });
