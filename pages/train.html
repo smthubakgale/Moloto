@@ -100,199 +100,203 @@
     
   </main>
   <script>
-    var readKey = window.parent.readKey;
-    var channel_Id = window.parent.channel_Id;
-    var rdC = -1;
-    var outs = [];
-    
-    $("#dts").on("click" , function()
-    {
-        $("#cis").on("click" , function()
+
+    $(window).on("load" , function()
+    { 
+        var readKey = window.parent.readKey;
+        var channel_Id = window.parent.channel_Id;
+        var rdC = -1;
+        var outs = [];
+        
+        $("#dts").on("click" , function()
         {
-            $("#isr").html("");
-        });
-      
-        window.parent.load_csv(function(json)
-        {
-             alert(json);
+            $("#cis").on("click" , function()
+            {
+                $("#isr").html("");
+            });
           
-               $("#isr").html("");
+            window.parent.load_csv(function(json)
+            {
+                 alert(json);
               
-               if(Array.isArray(json))
-               {
-                  var fin = $("table .fin");
-                  var log = [];
-                 if(json.length == 0)
-                 {
-                      log.push("Spreadsheet is Empty");
-                 }
-                 else
-                 {
-                     json.forEach((s)=>
-                       {
-                             var fn = false;
-                             outs.forEach((s2)=>
-                             {
-                                if(s2.Metal == s.Metal){ fn = true; }  
-                             });
-
-                         if(fn == false)
-                         {
-                            outs.push({
-                              Metal : s.Metal ,
-                              id : outs.length + 1
-                            });
-                         }
-                       });
-
-                     console.log(outs); 
-                     var dts = [];
-                     run(json , 0 , json.length);
-                     function run(json , k , max)
+                   $("#isr").html("");
+                  
+                   if(Array.isArray(json))
+                   {
+                      var fin = $("table .fin");
+                      var log = [];
+                     if(json.length == 0)
                      {
-                         $("#prog").html((100*k/max)+" %");
-                       
-                         if(k < max)
-                         {
-                             var s = json[k];
-                           
-                             var s1 = s.Start_Time;
-                             var s2 = s.End_Time;
-                             var mt = s.Metal;
-
-                              var ur = "https://api.thingspeak.com/channels/"+ channel_Id + "/feeds.json?api_key=" + readKey ;
-                       
-                              if(rdC > 0)
-                              {
-                                 ur += "&results=" + rdC; 
-                              }
-  
-                             console.log(s1 , s2);
-  
-                              if(s1 != null && s2 != null)
-                              {
-                                 s1 = new Date(s1);
-                                 s1.setHours(s1.getHours() - 2);
-                                 s2 = new Date(s2);
-                                 s2.setHours(s2.getHours() - 2);
-                    
-                                 //console.log(s1 , s2); 
-                    
-                                 s1 = tq(s1);
-                                 s2 = tq(s2);
-                    
-                                 //console.log(s1 , s2); 
-                    
-                                 ur += "&start=" + s1;
-                                 ur += "&end=" + s2;
-                                
-                                 function tq(ms){
-                                   var dt = ms;
-                                   const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
-                    
-                                   return `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())}%20`
-                                         + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
-                                 }
-                              }
-                            fetch(ur).then((r)=>
-                           { 
-                              if(r.status == 200)
-                              {
-                                return r.text();
-                              }
-                              else
-                              {
-                                 run(json , k + 1 , max);
-                              }
-                           }).then((t)=>
+                          log.push("Spreadsheet is Empty");
+                     }
+                     else
+                     {
+                         json.forEach((s)=>
+                           {
+                                 var fn = false;
+                                 outs.forEach((s2)=>
+                                 {
+                                    if(s2.Metal == s.Metal){ fn = true; }  
+                                 });
+    
+                             if(fn == false)
                              {
-                                var d = JSON.parse(t);
-                               
-                                const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
-  
-                                d.feeds.forEach((s)=>
-                                {
-                                  var dt = new Date(s.created_at);
-                                  dt.setHours(dt.getHours() + 0);
-                                 
-                                  var st = `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())}T`
-                                  + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
-
-                                   var id ;
-                                   outs.forEach((s2)=>
-                                     {
-                                        if(s2.Metal == mt)
-                                        {
-                                          id = s2.id
-                                        }
-                                     });
-                                  
-                                  dts.push({
-                                    Date : st ,
-                                    Current: s.field1 ,
-                                    Voltage: s.fiend2 ,
-                                    Metal : mt ,
-                                    id : id 
-                                  }); 
-                                 
+                                outs.push({
+                                  Metal : s.Metal ,
+                                  id : outs.length + 1
                                 });
-                                
-                                run(json , k + 1 , max);
-                             });
-                         }
-                         else
+                             }
+                           });
+    
+                         console.log(outs); 
+                         var dts = [];
+                         run(json , 0 , json.length);
+                         function run(json , k , max)
                          {
-                           var rr = `<table style="width:100%; margin-top:10px; margin-bottom:10px;">
-                           <tr>
-                               <th> Date </th>
-                               <th> ID </th>
-                               <th> Metal </th>
-                               <th> Current </th>
-                               <th> Voltage </th>
-                            </tr/>
-                            `;
-
-                            dts.forEach((s)=>
-                            {
-                               rr += `<tr> 
-                               <td> `+ s.Date + ` </td>
-                               <td> `+ s.ID + ` </td>
-                               <td> `+ s.Metal + ` </td>
-                               <td> `+ s.Current + ` </td>
-                               <td> `+ s.Voltage + ` </td>
-                               </tr>`;
-                            });
-
+                             $("#prog").html((100*k/max)+" %");
                            
-                           rr += "</table>";
-              
-                           $("#get").html(rr);
+                             if(k < max)
+                             {
+                                 var s = json[k];
+                               
+                                 var s1 = s.Start_Time;
+                                 var s2 = s.End_Time;
+                                 var mt = s.Metal;
+    
+                                  var ur = "https://api.thingspeak.com/channels/"+ channel_Id + "/feeds.json?api_key=" + readKey ;
                            
+                                  if(rdC > 0)
+                                  {
+                                     ur += "&results=" + rdC; 
+                                  }
+      
+                                 console.log(s1 , s2);
+      
+                                  if(s1 != null && s2 != null)
+                                  {
+                                     s1 = new Date(s1);
+                                     s1.setHours(s1.getHours() - 2);
+                                     s2 = new Date(s2);
+                                     s2.setHours(s2.getHours() - 2);
+                        
+                                     //console.log(s1 , s2); 
+                        
+                                     s1 = tq(s1);
+                                     s2 = tq(s2);
+                        
+                                     //console.log(s1 , s2); 
+                        
+                                     ur += "&start=" + s1;
+                                     ur += "&end=" + s2;
+                                    
+                                     function tq(ms){
+                                       var dt = ms;
+                                       const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
+                        
+                                       return `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())}%20`
+                                             + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
+                                     }
+                                  }
+                                fetch(ur).then((r)=>
+                               { 
+                                  if(r.status == 200)
+                                  {
+                                    return r.text();
+                                  }
+                                  else
+                                  {
+                                     run(json , k + 1 , max);
+                                  }
+                               }).then((t)=>
+                                 {
+                                    var d = JSON.parse(t);
+                                   
+                                    const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
+      
+                                    d.feeds.forEach((s)=>
+                                    {
+                                      var dt = new Date(s.created_at);
+                                      dt.setHours(dt.getHours() + 0);
+                                     
+                                      var st = `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())}T`
+                                      + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
+    
+                                       var id ;
+                                       outs.forEach((s2)=>
+                                         {
+                                            if(s2.Metal == mt)
+                                            {
+                                              id = s2.id
+                                            }
+                                         });
+                                      
+                                      dts.push({
+                                        Date : st ,
+                                        Current: s.field1 ,
+                                        Voltage: s.fiend2 ,
+                                        Metal : mt ,
+                                        id : id 
+                                      }); 
+                                     
+                                    });
+                                    
+                                    run(json , k + 1 , max);
+                                 });
+                             }
+                             else
+                             {
+                               var rr = `<table style="width:100%; margin-top:10px; margin-bottom:10px;">
+                               <tr>
+                                   <th> Date </th>
+                                   <th> ID </th>
+                                   <th> Metal </th>
+                                   <th> Current </th>
+                                   <th> Voltage </th>
+                                </tr/>
+                                `;
+    
+                                dts.forEach((s)=>
+                                {
+                                   rr += `<tr> 
+                                   <td> `+ s.Date + ` </td>
+                                   <td> `+ s.ID + ` </td>
+                                   <td> `+ s.Metal + ` </td>
+                                   <td> `+ s.Current + ` </td>
+                                   <td> `+ s.Voltage + ` </td>
+                                   </tr>`;
+                                });
+    
+                               
+                               rr += "</table>";
+                  
+                               $("#get").html(rr);
+                               
+                             }
                          }
                      }
-                 }
-               }
-
-                 console.log(log);
-
-                 if(log.length == 0)
-                 { 
-                    $("#fr").val(null);
-                    $("#to").val(null);
-                    $("#mt").val(null);
-                 }
-                 else
-                 {
-                    window.parent.clear_csv();
-                    log.forEach((s)=>
-                    {
-                        $("#isr").append($("<div/>").addClass("c").html(s));
-                    });
-                 }
-        });
-    });
+                   }
     
-      $("#dts").click();
+                     console.log(log);
+    
+                     if(log.length == 0)
+                     { 
+                        $("#fr").val(null);
+                        $("#to").val(null);
+                        $("#mt").val(null);
+                     }
+                     else
+                     {
+                        window.parent.clear_csv();
+                        log.forEach((s)=>
+                        {
+                            $("#isr").append($("<div/>").addClass("c").html(s));
+                        });
+                     }
+            });
+        });
+        
+          $("#dts").click();
+    });
   </script>
 </body>
 </html>
