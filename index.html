@@ -149,19 +149,8 @@
                  np.on("change" , function()
                  {
                     const file = document.getElementById("wgs").files[0];
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        // Get the binary data 
-                        const data = e.target.result; 
-                        if(cb2)
-                        {
-                          cb2(data);
-                          cb2 = null;
-                        }
-                    };
-                    
-                    // Read the data as binary
-                    reader.readAsDataURL(file);
+                    cb2(file);
+                    cb2 = null;
                  });
                  $("body").append(np); 
              }
@@ -295,19 +284,8 @@
             }
            else
             {
-                const file = document.getElementById("wgs").files[0];
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    // Get the binary data
-                    const data = e.target.result;
-                    if(cb)
-                    {
-                      cb(data);
-                    }
-                };
-                
-                // Read the data as binary
-                reader.readAsDataURL(file);
+                const file = document.getElementById("wgs").files[0]; 
+                cb(file);  
            }
          };
  
