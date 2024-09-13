@@ -1,4 +1,16 @@
-  
+function createModel() 
+{
+  var model = tf.sequential({
+       layers: [
+         tf.layers.dense({inputShape: [2,40], units:1 , activation: 'relu'}),    // input size [n ,2 ,40] -> shape [2,40] => [2 , 40*1] => [batch , 2 , 40]
+         tf.layers.flatten() ,                                                   // flatten -> [batch , 2*40 ] => [ batch , 80] 
+         tf.layers.dense({inputshape:[40] , units:1 ,  activation: 'softmax'}),   // output shape [n, 40 ] -> shape [40] => [40*1] => [batch , 40]
+       ]
+      });
+
+  return model;
+}
+
 function fromMatrix(mt)
 {
     var ret = "";
@@ -7,7 +19,6 @@ function fromMatrix(mt)
     {
         var a = "";
 
-      
         if(eq(s,[0,1])){ a = "0"; }
         if(eq(s,[0,2])){ a = "1"; }
         if(eq(s,[0,3])){ a = "2"; }
@@ -123,18 +134,5 @@ function toMatrix(str)
             r.push([3,7]);
         }
     }
-}
-
-function createModel() 
-{
-  var model = tf.sequential({
-       layers: [
-         tf.layers.dense({inputShape: [2,40], units:1 , activation: 'relu'}),    // input size [n ,2 ,40] -> shape [2,40] => [2 , 40*1] => [batch , 2 , 40]
-         tf.layers.flatten() ,                                                   // flatten -> [batch , 2*40 ] => [ batch , 80] 
-         tf.layers.dense({inputshape:[40] , units:1 ,  activation: 'softmax'}),   // output shape [n, 40 ] -> shape [40] => [40*1] => [batch , 40]
-       ]
-      });
-
-  return model;
 }
 
