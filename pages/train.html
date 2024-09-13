@@ -117,7 +117,7 @@
             console.log(typeof(window.parent));
             window.parent["get_csv"](function(json)
             {
-                 alert(json);
+                   console.log(json);
               
                    $("#isr").html("");
                   
@@ -131,7 +131,7 @@
                      }
                      else
                      {
-                         json.forEach((s)=>
+                           json.forEach((s)=>
                            {
                                  var fn = false;
                                  outs.forEach((s2)=>
@@ -295,7 +295,6 @@
             });
         });
 
-      setTimeout(function(){  $("#dts").click(); },1000);
           
     });
   </script>
