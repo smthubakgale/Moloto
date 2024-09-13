@@ -189,7 +189,7 @@
              cb1 = cb;
              $("#csv").click();
          }
-         window["load_csv"] = function()
+         window["load_csv"] = function(cb)
          {
 
            var qn = true;
@@ -204,6 +204,10 @@
             if(qn == false)
             {
                 alert("import data first");
+                window["import_csv"](function(json)
+                {
+                    window["load_csv"](cb);
+                })
             }
            else
             {
