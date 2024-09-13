@@ -208,6 +208,13 @@
                         alert("creating untrained model");
                         model = createModel();
                    }
+                  
+                   // Prepare the model for training.
+                    model.compile({
+                      optimizer: tf.train.adam(),
+                      loss: tf.losses.meanSquaredError,
+                      metrics: ['mse'],
+                    });
 
                    model.fit(xs , ys, {epochs : 100,
                    callbacks : {onEpochEnd : async(epoch , logs) => 
