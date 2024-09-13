@@ -6,7 +6,8 @@ function fromMatrix(mt)
     mt.forEach((s)=>
     {
         var a = "";
-        
+
+      
         if(eq(s,[0,1])){ a = "0"; }
         if(eq(s,[0,2])){ a = "1"; }
         if(eq(s,[0,3])){ a = "2"; }
