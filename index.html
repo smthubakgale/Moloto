@@ -178,17 +178,17 @@
                  $("body").append(np); 
              }
            
-         }
+         };
          window["clear_csv"] = function()
          { 
              $("#csv").val(null);
-         }
+         };
          window["import_csv"] = function(cb)
          {
              init_csv();
              cb1 = cb;
              $("#csv").click();
-         }
+         };
          window["get_csv"] = function(cb)
          {
 
@@ -237,7 +237,7 @@
                 // Read the data as binary
                 reader.readAsBinaryString(file);
            }
-         }
+         };
  
        });
     </script>
