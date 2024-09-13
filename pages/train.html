@@ -77,8 +77,14 @@
         <div>
             <button id="imw" class="btn btn-info" > Import Weights </button>
         </div>
+        <div>
+            <button id="imm" class="btn btn-warning" > Import Structure </button>
+        </div>
+        <div>
+            <button id="imc" class="btn btn-info" > Import Model </button>
+        </div>
         <div style="margin-left:10px;">
-            <button id="exw" class="btn btn-success" > Save Weights </button>
+            <button id="exw" class="btn btn-success" > Save Model </button>
         </div>
         <div style="flex:1;"></div>
         <div id="prog" style="width:60px; text-align:center; padding:5px; font-weight:500;"></div>
@@ -118,6 +124,8 @@
         var outs = [];
         var dts = []; 
         var model;
+        var m_file;
+        var w_file; 
 
         $("#exw").on("click" ,  function()
         {
@@ -134,19 +142,28 @@
             }
         });
       
-        $("#imw").on("click" , function()
+        $("#imc").on("click" , function()
         {
-            window.parent.import_weights(function(w_file)
+            window.parent.import_weights(function(m_file , w_file)
             {
-               window.parent.import_model(function(m_file)
-              {
-                 tf.loadLayersModel(tf.io.browserFiles([m_file , w_file])).then((md)=>
+              tf.loadLayersModel(tf.io.browserFiles([m_file , w_file])).then((md)=>
                  {
                     alert("A"); 
-                 })
-                      
-              });
-                    
+                 })  
+            });
+        });
+        $("#imw").on("click" , function()
+        {
+            window.parent.import_weights(function(file)
+            {
+                 alert("Model Weights Uploaded"); 
+            });
+        });
+        $("#imm").on("click" , function()
+        {
+            window.parent.import_model(function(file)
+            {
+                 alert("Model Structure Uploaded"); 
             });
         });
       
