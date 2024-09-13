@@ -144,12 +144,15 @@
       
         $("#imc").on("click" , function()
         {
-            window.parent.import_weights(function(m_file , w_file)
+            window.parent.get_weights(function(w_file)
             {
-              tf.loadLayersModel(tf.io.browserFiles([m_file , w_file])).then((md)=>
-                 {
-                    alert("A"); 
-                 })  
+                window.parent.get_model(function(m_file)
+                {
+                     tf.loadLayersModel(tf.io.browserFiles([m_file , w_file])).then((md)=>
+                     {
+                         alert("A"); 
+                     })  
+                });
             });
         });
         $("#imw").on("click" , function()
