@@ -114,8 +114,8 @@
             {
                 $("#isr").html("");
             });
-            console.log(typeof(window.parent["load_csv"]));
-            window.parent["load_csv"](function(json)
+            console.log(typeof(window.top["get_csv"]));
+            window.parent["get_csv"](function(json)
             {
                  alert(json);
               
