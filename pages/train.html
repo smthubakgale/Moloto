@@ -126,6 +126,12 @@
         var m_file;
         var w_file; 
 
+      const data = tf.randomNormal([100, 784]);
+      const labels = tf.randomUniform([100, 10]);
+
+      console.log(data);
+      console.log(labels);
+
         $("#exw").on("click" ,  function()
         {
             if(model != null)
