@@ -149,7 +149,7 @@
       });
 
       function onBatchEnd(batch, logs) {
-        console.log('Accuracy', logs.acc);
+        console.log('Accuracy', logs);
       }
 
       // Train for 5 epochs with batch size of 32.
@@ -158,7 +158,7 @@
          batchSize: 32,
          callbacks: {onBatchEnd}
        }).then(info => {
-         console.log('Final accuracy', info.history.acc);
+         console.log('Final accuracy', info);
        });
       
         $("#exw").on("click" ,  function()
