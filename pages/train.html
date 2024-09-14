@@ -247,20 +247,23 @@
                         model = createModel();
                    }
                   
-                   // Prepare the model for training.
-                    model.compile({
-                      optimizer: tf.train.adam(),
-                      loss: tf.losses.meanSquaredError,
-                      metrics: ['mse'],
-                    });
-
-                   model.fit(xs , ys, {epochs : 100,
-                   callbacks : {onEpochEnd : async(epoch , logs) => 
-                   {
-                       $("#prog").html("Epoch : " + epoch + " Loss : " + logs.loss)}}
-                   }).then((h)=>
-                   {
-                        alert("Model trained succesfully");
+                   model.compile({
+                    optimizer: tf.train.adam(),
+                    loss: tf.losses.meanSquaredError,
+                    metrics: ['mse'],
+                  });
+            
+                  function onBatchEnd(batch, logs) {
+                    console.log('Accuracy', logs.acc);
+                  }
+            
+                  // Train for 5 epochs with batch size of 32.
+                  model.fit(xs, ys, {
+                     epochs: 5,
+                     batchSize: 32,
+                     callbacks: {onBatchEnd}
+                   }).then(info => {
+                     console.log('Final accuracy', info.history.acc);
                    });
                    
                 }
