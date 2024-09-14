@@ -73,6 +73,7 @@ function toMatrix(str)
     var arr = str.trim().replaceAll(" ","_").split("");
     var ret = [];
 
+    console.log(arr);
     arr.forEach((s , k)=>
     {
         var a;
@@ -134,5 +135,7 @@ function toMatrix(str)
             r.push([3,7]);
         }
     }
+
+  return r;
 }
 
