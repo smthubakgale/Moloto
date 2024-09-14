@@ -271,7 +271,7 @@
                      console.log('Final accuracy', info);
                     var xp = tf.tensor3d([xr[0]] , [1 , 2 , 40]);
                     var res = model.predict(xp)
-                    .mul(7.sub(0))
+                    .mul(7 - 0)
                     .add(0);
                     console.log(res);
                     console.log(res.dataSync() , yr[0]);
