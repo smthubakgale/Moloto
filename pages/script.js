@@ -4,7 +4,7 @@ function createModel()
        layers: [
          tf.layers.dense({inputShape: [2,40], units:1 , activation: 'relu'}),    // input size [n ,2 ,40] -> shape [2,40] => [2 , 40*1] => [batch , 2 , 40]
          tf.layers.flatten() ,                                                   // flatten -> [batch , 2*40 ] => [ batch , 80] 
-         tf.layers.dense({inputshape:[40] , units:1 ,  activation: 'softmax'}),   // output shape [n, 40 ] -> shape [40] => [40*1] => [batch , 40]
+         tf.layers.dense({inputshape:[1] , units:40 ,  activation: 'softmax'}),   // output shape [n, 40 ] -> shape [40] => [40*1] => [batch , 40]
        ]
       });
 
