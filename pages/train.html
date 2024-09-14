@@ -154,9 +154,13 @@
 
       // Train for 5 epochs with batch size of 32.
       model.fit(data, labels, {
-         epochs: 5,
+         epochs: 50,
          batchSize: 32,
-         callbacks: {onBatchEnd}
+         callbacks:  tfvis.show.fitCallbacks(
+            { name: 'Training Performance' },
+            ['loss', 'mse'],
+            { height: 200, callbacks: ['onEpochEnd'] }
+          )
        }).then(info => {
          console.log('Final accuracy', info);
        });
