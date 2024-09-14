@@ -225,8 +225,8 @@
 
                    dts.forEach((s)=>
                    {
-                       xr.push([[ tomatrix(s.Voltage) , toMatrix(s.Current)]]);
-                       yr.push( toMatrix(s.ID) );
+                       xr.push([[ toMatrix(s.Voltage) , toMatrix(s.Current)]]);
+                       yr.push( toMatrix(s.ID + "") );
                    });
 
                   console.log(xr);
