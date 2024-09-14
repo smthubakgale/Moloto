@@ -56,6 +56,11 @@
     $("#sum").on("click" , function()
     {
        const model = createModel();
+      
+      if($("#tfjs-visor-container").length != 0)
+      {
+        $("#tfjs-visor-container").remove();
+      }
        tfvis.show.modelSummary({name: 'Model Summary'}, model);
     });
     hljs.highlightAll();
