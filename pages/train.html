@@ -264,8 +264,8 @@
                     $("#tfjs-visor-container").remove();
                   }
                   model.fit(xs, ys, {
-                     epochs: 100,
-                     batchSize: 32,
+                     epochs: 1000,
+                     batchSize: 64,
                      callbacks:  tfvis.show.fitCallbacks(
                         { name: 'Training Performance' },
                         ['loss', 'mse'],
