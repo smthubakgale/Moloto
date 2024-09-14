@@ -272,8 +272,14 @@
                     var xp = tf.tensor3d([xr[0]] , [1 , 2 , 40]);
                     var res = model.predict(xp);
                     
-                    console.log(model);
-                    console.log(res.dataSync() , yr[0]);
+                    var r = [];
+                    var min = 0;
+                    var max = 7;
+                    res.dataSync().foreach((s)=>
+                    {
+                      r.push(min + s*(max - min));
+                    });
+                    console.log(r , yr[0]);
                    });
                    
                 }
