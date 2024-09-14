@@ -272,7 +272,7 @@
                     var xp = tf.tensor3d([xr[0]] , [1 , 2 , 40]);
                     var res = model.predict(xp);
                     console.log(res);
-                    console.log(res.dataSync()[0] , ys[0]);
+                    console.log(res.dataSync() , yr[0]);
                    });
                    
                 }
