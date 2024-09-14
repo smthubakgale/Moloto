@@ -259,6 +259,10 @@
                   });
             
                   // Train for 5 epochs with batch size of 32.
+                  if($("#tfjs-visor-container").length != 0)
+                  {
+                    $("#tfjs-visor-container").remove();
+                  }
                   model.fit(xs, ys, {
                      epochs: 100,
                      batchSize: 32,
