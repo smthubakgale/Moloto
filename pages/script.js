@@ -118,21 +118,23 @@ function toMatrix(str)
         if(b == "_"){ a = [3,7]; }
         if(b == "."){ a = [3,8]; } 
 
-        if(k < 40)
+        if(k < 20)
         {
           ret.push(a);
         }
     });
 
     var r = [];
-    for(var k = 0 ; k < 40;k++)
+    for(var k = 0 ; k < 20;k++)
     {
         if(k < arr.length)
         {
-            r.push(ret[k]);
+            r.push(ret[k][0]);
+            r.push(ret[k][1]);
         }
         else{
-            r.push([3,7]);
+            r.push(3);
+            r.push(7);
         }
     }
 
