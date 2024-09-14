@@ -163,6 +163,11 @@
           )
        }).then(info => {
          console.log('Final accuracy', info);
+        var xs = tf.tensor3d([ [ [2,2] , [2,2] ] ] , [1 , 2 , 2]);
+         model.predict(xs).then((res)=>
+           {
+             console.log(res);
+           })
        });
       
         $("#exw").on("click" ,  function()
