@@ -272,6 +272,9 @@
                      callbacks: {onBatchEnd}
                    }).then(info => {
                      console.log('Final accuracy', info.history.acc);
+                    var xp = tf.tensor3d(xr[0] , [1 , 2 , 40]);
+                    var res = model.predict(xp);
+                    console.log(res);
                    });
                    
                 }
