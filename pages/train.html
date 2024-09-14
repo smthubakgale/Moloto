@@ -261,17 +261,17 @@
                     metrics: ['mse'],
                   });
             
-                  function onBatchEnd(batch, logs) {
-                    console.log('Accuracy', logs.acc);
-                  }
-            
                   // Train for 5 epochs with batch size of 32.
                   model.fit(xs, ys, {
-                     epochs: 5,
+                     epochs: 50,
                      batchSize: 32,
-                     callbacks: {onBatchEnd}
+                     callbacks:  tfvis.show.fitCallbacks(
+                        { name: 'Training Performance' },
+                        ['loss', 'mse'],
+                        { height: 200, callbacks: ['onEpochEnd'] }
+                      )
                    }).then(info => {
-                     console.log('Final accuracy', info.history.acc);
+                     console.log('Final accuracy', info);
                     var xp = tf.tensor3d([xr[0]] , [1 , 2 , 40]);
                     var res = model.predict(xp);
                     console.log(res);
