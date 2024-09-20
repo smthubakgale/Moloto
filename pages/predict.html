@@ -123,8 +123,7 @@
     { 
         var readKey = window.parent.readKey;
         var channel_Id = window.parent.channel_Id;
-        var rdC = -1;
-        var outs = [];
+        var rdC = -1;  
         var dts = [];  
         var m_file;
         var w_file; 
@@ -175,7 +174,7 @@
    
                });
    
-                console.log(id , pd);
+                console.log(id , pd , outs.length);
     
                 cb(pd);
             }
