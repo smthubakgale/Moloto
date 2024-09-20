@@ -361,9 +361,8 @@
         $("#imd").on("click" , function()
         {
             window.parent.import_metal_ids(function(data)
-            { 
-              console.log(data);
-              outs = JSON.parse(data);
+            {  
+              outs = data;
               alert("Metal IDs Uploaded"); 
             });
         });
