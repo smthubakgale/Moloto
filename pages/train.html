@@ -160,12 +160,13 @@
             if(outs.length > 0)
             {
               var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(outs));
-              var a = $("<a>");
+              var a = $("<a/>");
               a.attr("href",     dataStr     );
               a.attr("download", "hevo.ids.json");
               $("body").append(a);
               a.click();
               a.remove();
+             
 
               alert("Metal IDs saved successfully");
             }
