@@ -25,19 +25,23 @@ function createModel()
   
     return md;
 }
-function saveModel() 
+function saveModel(cb) 
 { 
    if (localStorage.length > 0)
    {
       let item = Number(localStorage.getItem('saveNo'));
-      await model.save(`indexeddb://hevoPredict-${item + 1}`);
-      localStorage.setItem('saveNo', item + 1);
+      model.save(`indexeddb://hevoPredict-${item + 1}`).then(()=>
+      {
+        localStorage.setItem('saveNo', item + 1);
+        cb();
+      });
    }
    else 
    {
-      await model.save(`indexeddb://hevoPredict-1`).then(()=>
+      model.save(`indexeddb://hevoPredict-1`).then(()=>
       {
           localStorage.setItem('saveNo', 1);
+          cb();
       });
      
   }
