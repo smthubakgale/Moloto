@@ -3,14 +3,14 @@ var outs = [];
 
 function createModel() 
 {
-    let md = window.top.tf.sequential();
-    const hidden = window.top.tf.layers.dense({
+    let md = tf.sequential();
+    const hidden = tf.layers.dense({
       units: 15,
       inputShape: [2],
       activation: 'sigmoid'
     });
   
-    const output = window.top.tf.layers.dense({
+    const output = tf.layers.dense({
       units: 9,
       activation: 'softmax'
     });
@@ -18,7 +18,7 @@ function createModel()
     md.add(output);
   
     const LEARNING_RATE = 0.25;
-    const optimizer = window.top.tf.train.sgd(LEARNING_RATE);
+    const optimizer = tf.train.sgd(LEARNING_RATE);
   
     md.compile({
       optimizer: optimizer,
@@ -57,12 +57,12 @@ function saveModel(cb)
    if (window.top.localStorage.length > 0) 
    {
     const LEARNING_RATE = 0.25;
-    const optimizer = window.top.tf.train.sgd(LEARNING_RATE);
+    const optimizer = tf.train.sgd(LEARNING_RATE);
     let item = Number(window.top.localStorage.getItem('saveNo'));
     
     if(item > 0)
     { 
-        window.top.tf.loadModel(`indexeddb://hevoPredict-${item}`).then((md)=>
+        tf.loadModel(`indexeddb://hevoPredict-${item}`).then((md)=>
         {
             var m = md;
             
