@@ -175,13 +175,19 @@
             }
         });
         $("#exw").on("click" ,  function()
-        {
+        { 
             if(model != null)
             {
+               saveModel(function()
+               {
+                  alert("Weights Saved Successfully");
+               }); 
+              /*
                  model.save('downloads://hevo').then(()=>
                  {
                     alert("Weights Saved Successfully");
                  });
+              */
             }
             else
             {
@@ -219,37 +225,56 @@
 
                    var ys = tf.oneHot(labelsTensor, 9).cast('float32');
                    labelsTensor.dispose();
-                   
+                    
                    if(model == null)
                    {
-                        alert("creating untrained model");
-                        model = createModel();
+                       loadMd(function(md)
+                       {
+                          if(md == null)
+                          {
+                             alert("creating untrained model");
+                             model = createModel();
+                          }
+                          else
+                          {
+                             model = md;
+                             console.log("Session Model");
+                          } 
+                          proc();
+                      }); 
                    }
-                   
-                  // Train for 5 epochs with batch size of 32.
-                  if($("#tfjs-visor-container").length != 0)
-                  {
-                    $("#tfjs-visor-container").remove();
-                  }
-                  model.fit(xs, ys, {
-                     shuffle: true,
-                     validationSplit: 0.1,
-                     epochs: 100,  
-                     callbacks:  tfvis.show.fitCallbacks(
-                        { name: 'Training Performance' },
-                        ['loss', 'acc'],
-                        { height: 200, callbacks: ['onEpochEnd'] }
-                      )
-                   }).then(info =>
-                    { 
-                       var ac = info.history.acc; 
-                       ac = ac[ac.length - 1]; 
-                       ac = parseFloat(ac);
-                       $("#acr").html((ac*100) + " %");
+                   else
+                   {
+                      proc();
+                   }
 
-                       predict(0);
-                       
-                   });
+                  function proc()
+                  { 
+                        // Train for 5 epochs with batch size of 32.
+                        if($("#tfjs-visor-container").length != 0)
+                        {
+                          $("#tfjs-visor-container").remove();
+                        }
+                        model.fit(xs, ys, {
+                           shuffle: true,
+                           validationSplit: 0.1,
+                           epochs: 100,  
+                           callbacks:  tfvis.show.fitCallbacks(
+                              { name: 'Training Performance' },
+                              ['loss', 'acc'],
+                              { height: 200, callbacks: ['onEpochEnd'] }
+                            )
+                         }).then(info =>
+                          { 
+                             var ac = info.history.acc; 
+                             ac = ac[ac.length - 1]; 
+                             ac = parseFloat(ac);
+                             $("#acr").html((ac*100) + " %");
+      
+                             predict(0);
+                             
+                         });
+                  } 
                    
                 }
              }
