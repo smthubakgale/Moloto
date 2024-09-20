@@ -1,3 +1,4 @@
+var model;
 function createModel() 
 {
     let md = tf.sequential();
