@@ -139,6 +139,34 @@
             console.log(p);
             $(".bod").attr("src", p);
          }
+         var cb4;
+         function init_metal_ids()
+         {
+             if($("#mid").length == 0)
+             {
+                 var np = $("<input/>").css("display","none").attr("type" , "file").attr("id","mid")
+                         .attr("accept" , ".json");
+                 np.on("change" , function()
+                 {
+                    const file = document.getElementById("mid").files[0];
+                    new Response(file).json().then(json => {
+                        console.log(json);
+                       
+                        if(cb4)
+                        {
+                          cb4(json);
+                          cb4 = null;
+                        }
+                    }, err => {
+                      // not json
+                      alert("not JSON");
+                    }) 
+                    
+                 });
+                 $("body").append(np); 
+             }
+           
+         };
          var cb3;
          function init_model()
          {
