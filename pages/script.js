@@ -34,7 +34,7 @@ function saveModel(cb)
    if (localStorage.length > 0)
    {
       let item = Number(localStorage.getItem('saveNo'));
-      model.save(`localstorage://hevoPredict-${item + 1}`).then(()=>
+      model.save(`localstorage://hevoPredict-${item + 0}`).then(()=>
       {
          localStorage.setItem('saveNo', item + 1);
          localStorage.setItem(`hevoOuts-${item + 1}` , JSON.stringify(outs));
