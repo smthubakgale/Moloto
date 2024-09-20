@@ -233,16 +233,19 @@
 
                    dts.forEach((s)=>
                    {
-                       xr.push([ toMatrix(s.Voltage) , toMatrix(s.Current)]);
-                       yr.push( toMatrix(s.ID + "") );
+                       xr.push([ s.Voltage , s.Current]);
+                       yr.push( s.ID );
                    });
 
                   console.log(xr);
                   console.log(yr);
                   
-                   var ys = tf.tensor2d(yr , [yr.length , 40]);
-                   var xs = tf.tensor3d(xr , [xr.length , 2 , 40]);
-                  
+                   var xs = tf.tensor2d(xr);
+                   var labelsTensor = tf.tensor1d(yr, 'int32');
+
+                   var ys = tf.oneHot(labelsTensor, 9).cast('float32');
+                   labelsTensor.dispose();
+                   
                    console.log(xs);
                    console.log(ys);
 
@@ -251,12 +254,7 @@
                         alert("creating untrained model");
                         model = createModel();
                    }
-                  
-                   model.compile({
-                    optimizer: tf.train.adam(),
-                    loss: tf.losses.meanSquaredError,
-                    metrics: ['mse'],
-                  });
+                   
             
                   // Train for 5 epochs with batch size of 32.
                   if($("#tfjs-visor-container").length != 0)
