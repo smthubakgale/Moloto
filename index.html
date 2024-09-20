@@ -149,8 +149,7 @@
                  np.on("change" , function()
                  {
                     const file = document.getElementById("mid").files[0];
-                    new Response(file).json().then(json => {
-                        console.log(json);
+                    new Response(file).json().then(json => { 
                        
                         if(cb4)
                         {
@@ -315,8 +314,7 @@
                     // Convert the sheet to JSON
                     const jsonData = XLSX.utils.sheet_to_json(sheet);
                 
-                    // Do something with the JSON data 
-                    console.log(jsonData);
+                    // Do something with the JSON data  
                     if(cb)
                     {
                       cb(jsonData);
@@ -396,8 +394,7 @@
            else
             {
                 const file = document.getElementById("mid").files[0]; 
-                new Response(file).json().then(json => {
-                        console.log(json);
+                new Response(file).json().then(json => { 
                        
                         cb(json); 
                     }, err => {
