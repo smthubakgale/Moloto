@@ -229,18 +229,12 @@
                        yr.push( s.ID );
                    });
 
-                  console.log(xr);
-                  console.log(yr);
-                  
                    var xs = tf.tensor2d(xr);
                    var labelsTensor = tf.tensor1d(yr, 'int32');
 
                    var ys = tf.oneHot(labelsTensor, 9).cast('float32');
                    labelsTensor.dispose();
                    
-                   console.log(xs);
-                   console.log(ys);
-
                    if(model == null)
                    {
                         alert("creating untrained model");
@@ -288,6 +282,15 @@
       
         function predict(rx)
         {
+             var xr = [];
+             var yr = [];
+
+             dts.forEach((s)=>
+             {
+                 xr.push([ s.Voltage , s.Current]);
+                 yr.push( s.ID );
+             });
+          
              var xp = tf.tensor2d([xr[rx]]);
              var res = model.predict(xp);
              var argMax = res.argMax(1);
