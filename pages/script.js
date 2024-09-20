@@ -31,22 +31,22 @@ function createModel()
 
 function saveModel(cb) 
 { 
-   if (localStorage.length > 0)
+   if (window.top.localStorage.length > 0)
    {
-      let item = Number(localStorage.getItem('saveNo'));
-      model.save(`indexeddb://hevoPredict-${item + 1}`).then(()=>
+      let item = Number(window.top.localStorage.getItem('saveNo'));
+      window.top.model.save(`indexeddb://hevoPredict-${item + 1}`).then(()=>
       {
-         localStorage.setItem('saveNo', item + 1);
-         localStorage.setItem(`hevoOuts-${item + 1}` , JSON.stringify(outs));
+         window.top.localStorage.setItem('saveNo', item + 1);
+         window.top.localStorage.setItem(`hevoOuts-${item + 1}` , JSON.stringify(window.top.outs));
         cb();
       });
    }
    else 
    {
-      model.save(`indexeddb://hevoPredict-1`).then(()=>
+      window.top.model.save(`indexeddb://hevoPredict-1`).then(()=>
       {
-          localStorage.setItem('saveNo', 1);
-          localStorage.setItem(`hevoOuts-${1}` , JSON.stringify(outs));
+          window.top.localStorage.setItem('saveNo', 1);
+          window.top.localStorage.setItem(`hevoOuts-${1}` , JSON.stringify(window.top.outs));
           cb();
       });
      
@@ -54,15 +54,15 @@ function saveModel(cb)
 }
  function loadMd(cb) 
  { 
-   if (localStorage.length > 0) 
+   if (window.top.localStorage.length > 0) 
    {
     const LEARNING_RATE = 0.25;
-    const optimizer = tf.train.sgd(LEARNING_RATE);
-    let item = Number(localStorage.getItem('saveNo'));
+    const optimizer = window.top.tf.train.sgd(LEARNING_RATE);
+    let item = Number(window.top.localStorage.getItem('saveNo'));
     
     if(item > 0)
     { 
-        tf.loadModel(`indexeddb://hevoPredict-${item}`).then((md)=>
+        window.top.tf.loadModel(`indexeddb://hevoPredict-${item}`).then((md)=>
         {
             var m = md;
             
@@ -71,7 +71,7 @@ function saveModel(cb)
               loss: 'categoricalCrossentropy',
               metrics: ['accuracy'],
             });
-            outs = JSON.parse(localStorage.setItem(`hevoOuts-${item}`));
+            window.top.outs = JSON.parse(window.top.localStorage.setItem(`hevoOuts-${item}`));
             cb(m);
         });
    }
