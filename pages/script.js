@@ -3,14 +3,14 @@ var outs = [];
 
 function createModel() 
 {
-    let md = tf.sequential();
-    const hidden = tf.layers.dense({
+    let md = window.top.tf.sequential();
+    const hidden = window.top.tf.layers.dense({
       units: 15,
       inputShape: [2],
       activation: 'sigmoid'
     });
   
-    const output = tf.layers.dense({
+    const output = window.top.tf.layers.dense({
       units: 9,
       activation: 'softmax'
     });
@@ -18,7 +18,7 @@ function createModel()
     md.add(output);
   
     const LEARNING_RATE = 0.25;
-    const optimizer = tf.train.sgd(LEARNING_RATE);
+    const optimizer = window.top.tf.train.sgd(LEARNING_RATE);
   
     md.compile({
       optimizer: optimizer,
