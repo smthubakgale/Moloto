@@ -53,7 +53,7 @@ function saveModel(cb)
     const LEARNING_RATE = 0.25;
     const optimizer = tf.train.sgd(LEARNING_RATE);
     let item = Number(localStorage.getItem('saveNo'));
-    await tf.loadModel(`indexeddb://hevoPredic-${item}`).then((md)=>
+    tf.loadModel(`indexeddb://hevoPredic-${item}`).then((md)=>
     {
         var model = md;
         
