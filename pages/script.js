@@ -53,25 +53,25 @@ function saveModel(cb)
     const LEARNING_RATE = 0.25;
     const optimizer = tf.train.sgd(LEARNING_RATE);
     let item = Number(localStorage.getItem('saveNo'));
-
-       if(item > 0)
-       { 
-            tf.loadModel(`indexeddb://hevoPredic-${item}`).then((md)=>
-            {
-                var model = md;
-                
-                model.compile({
-                  optimizer: optimizer,
-                  loss: 'categoricalCrossentropy',
-                  metrics: ['accuracy'],
-                });
-        
-                cb(model);
+    console.log(item);
+   if(item > 0)
+   { 
+        tf.loadModel(`indexeddb://hevoPredic-${item}`).then((md)=>
+        {
+            var model = md;
+            
+            model.compile({
+              optimizer: optimizer,
+              loss: 'categoricalCrossentropy',
+              metrics: ['accuracy'],
             });
-       }
-       else{
-           cb(null);
-       }
+    
+            cb(model);
+        });
+   }
+   else{
+       cb(null);
+   }
   } 
   else 
   {
