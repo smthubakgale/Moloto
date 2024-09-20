@@ -34,7 +34,7 @@ function saveModel(cb)
    if (localStorage.length > 0)
    {
       let item = Number(localStorage.getItem('saveNo'));
-      model.save(`localstorage://hevoPredict-${item + 0}`).then(()=>
+      model.save(`indexeddb://hevoPredict-${item + 0}`).then(()=>
       {
          localStorage.setItem('saveNo', item + 1);
          localStorage.setItem(`hevoOuts-${item + 1}` , JSON.stringify(outs));
@@ -43,7 +43,7 @@ function saveModel(cb)
    }
    else 
    {
-      model.save(`localstorage://hevoPredict-1`).then(()=>
+      model.save(`indexeddb://hevoPredict-1`).then(()=>
       {
           localStorage.setItem('saveNo', 1);
           localStorage.setItem(`hevoOuts-${1}` , JSON.stringify(outs));
@@ -62,7 +62,7 @@ function saveModel(cb)
     
     if(item > 0)
     { 
-        tf.loadModel(`localstorage://hevoPredict-${item}`).then((md)=>
+        tf.loadModel(`indexeddb://hevoPredict-${item}`).then((md)=>
         {
             var m = md;
             
