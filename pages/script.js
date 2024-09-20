@@ -31,22 +31,22 @@ function createModel()
 
 function saveModel(cb) 
 { 
-   if (window.top.localStorage.length > 0)
+   if (localStorage.length > 0)
    {
-      let item = Number(window.top.localStorage.getItem('saveNo'));
-      window.top.model.save(`indexeddb://hevoPredict-${item + 1}`).then(()=>
+      let item = Number(localStorage.getItem('saveNo'));
+      model.save(`indexeddb://hevoPredict-${item + 1}`).then(()=>
       {
-         window.top.localStorage.setItem('saveNo', item + 1);
-         window.top.localStorage.setItem(`hevoOuts-${item + 1}` , JSON.stringify(window.top.outs));
+         localStorage.setItem('saveNo', item + 1);
+         localStorage.setItem(`hevoOuts-${item + 1}` , JSON.stringify(outs));
         cb();
       });
    }
    else 
    {
-      window.top.model.save(`indexeddb://hevoPredict-1`).then(()=>
+      model.save(`indexeddb://hevoPredict-1`).then(()=>
       {
-          window.top.localStorage.setItem('saveNo', 1);
-          window.top.localStorage.setItem(`hevoOuts-${1}` , JSON.stringify(window.top.outs));
+          localStorage.setItem('saveNo', 1);
+          localStorage.setItem(`hevoOuts-${1}` , JSON.stringify(outs));
           cb();
       });
      
@@ -54,11 +54,11 @@ function saveModel(cb)
 }
  function loadMd(cb) 
  { 
-   if (window.top.localStorage.length > 0) 
+   if (localStorage.length > 0) 
    {
     const LEARNING_RATE = 0.25;
     const optimizer = tf.train.sgd(LEARNING_RATE);
-    let item = Number(window.top.localStorage.getItem('saveNo'));
+    let item = Number(localStorage.getItem('saveNo'));
     
     if(item > 0)
     { 
@@ -71,7 +71,7 @@ function saveModel(cb)
               loss: 'categoricalCrossentropy',
               metrics: ['accuracy'],
             });
-            window.top.outs = JSON.parse(window.top.localStorage.setItem(`hevoOuts-${item}`));
+            outs = JSON.parse(localStorage.setItem(`hevoOuts-${item}`));
             cb(m);
         });
    }
