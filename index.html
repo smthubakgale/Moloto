@@ -241,6 +241,10 @@
              }
            
          };
+         window["clear_metal_ids"] = function()
+         { 
+             $("#mid").val(null);
+         };
          window["clear_weights"] = function()
          { 
              $("#wgs").val(null);
@@ -248,6 +252,13 @@
          window["clear_csv"] = function()
          { 
              $("#csv").val(null);
+         };
+         // 
+         window["import_metal_ids"] = function(cb)
+         {
+             init_metal_ids();
+             cb4 = cb;
+             $("#mid").click();
          };
          window["import_model"] = function(cb)
          {
@@ -267,6 +278,7 @@
              cb1 = cb;
              $("#csv").click();
          };
+         //
          window["get_csv"] = function(cb)
          {
             cb1 = cb;
@@ -361,6 +373,37 @@
             {
                 const file = document.getElementById("mds").files[0]; 
                 cb(file);  
+           }
+         };
+         window["get_metal_ids"] = function(cb)
+         {
+            cb4 = cb;
+            var qn = true;
+
+           try{
+             qn = (document.getElementById("mid").files != null && document.getElementById("mid").files.length != 0);
+           }
+           catch{
+             qn = false;
+           }
+            if(qn == false)
+            {
+                window["import_metal_ids"](function(json)
+                {
+                    window["get_metal_ids"](cb);
+                })
+            }
+           else
+            {
+                const file = document.getElementById("mid").files[0]; 
+                new Response(file).json().then(json => {
+                        console.log(json);
+                       
+                        cb(json); 
+                    }, err => {
+                      // not json
+                      alert("not JSON");
+                    }) 
            }
          };
  
