@@ -290,13 +290,18 @@
                      epochs: 1000,  
                      callbacks:  tfvis.show.fitCallbacks(
                         { name: 'Training Performance' },
-                        ['loss', 'mse'],
+                        ['loss', 'acc'],
                         { height: 200, callbacks: ['onEpochEnd'] }
                       )
                    }).then(info =>
                     {
                        console.log('Final accuracy', info);
-                       var xp = tf.tensor3d([xr[0]] , [1 , 2 , 40]);
+                       var ac = info.history.acc;
+                       console.log(ac);
+                       ac = ac[ac.length - 1];
+                       console.log(ac); 
+                       $("#acr").html(ac);
+                       var xp = tf.tensor2d([xr[0]]);
                        var res = model.predict(xp);
                        var argMax = res.argMax(1);
                        var id = argMax.dataSync()[0];
@@ -305,7 +310,6 @@
 
                        $("#acm").html(yr[0]);
                        $("#pdm").html(id);
-                       $("#acr").html("");
                    });
                    
                 }
