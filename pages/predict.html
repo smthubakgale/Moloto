@@ -126,7 +126,207 @@
         var model;
         var m_file;
         var w_file; 
+        var tcp = false; 
+        var tcR;
+        var psR;
+        var qt = 1;
 
+          window["rdft"] = function(ts)
+          {
+             clearInterval(tcR);
+    
+            tcf();
+          }
+          tcf();
+  
+          window["rdd"] = function(ts){
+             var val = $(ts).val();
+            //console.log(val);
+            qt = val;
+          }
+          window["getTime"] = function(t)
+          {
+             var v = $(t).val(); 
+             var ms = new Date();
+    
+            if(v == "minute")
+            {
+               ms.setMinutes(ms.getMinutes() - qt);
+            }
+    
+            if(v == "hour")
+            {
+               ms.setHours(ms.getHours() - qt);
+            }
+    
+            if(v == "day")
+            {
+               ms.setDate(ms.getDate() - qt);
+            }
+    
+            if(v == "week")
+            {
+               ms.setDate(ms.getDate() - 7*qt);
+            }
+    
+            if(v == "month")
+            {
+               ms.setMonth(ms.getMonth() - qt);
+            }
+    
+            if(v == "year")
+            {
+               ms.setFullYear(ms.getFullYear() - qt);
+            }
+    
+            var dt = ms;
+            const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
+            dt.setHours(dt.getHours() - 2);
+            var st = `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())}%20`
+              + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
+    
+            //console.log(v , st);
+    
+            if(tcp)
+            {
+               $("#km").html(st.replace("%20"," ") +" to Now"); 
+            }
+            else
+            {
+               $("#km").html(""); 
+            }
+            
+            psR = st;
+          }
+        
+          getTime($("#pst")[0]);
+        
+          function tcf()
+          {
+            var val = $("#rfr").val();
+    
+            //console.log(tcp , val)
+              
+            tcR = setInterval(function()
+            {
+               if(tcp)
+               {
+                   getTime($("#pst")[0]);
+                   nex();
+               }
+            
+            },  parseInt(val) );
+          }
+        
+           window["live"] = function(ts)
+           {
+               var val = $(ts).is(":checked");
+    
+              //console.log(val);
+               tcp = val;
+           }
+        
+           $("#gt1").on("click", function()
+           {
+              nex();
+           });
+  
+          function nex()
+          {
+            var ur = "https://api.thingspeak.com/channels/"+ channel_Id + "/feeds.json?api_key=" + readKey ;
+     
+            if(rdC > 0)
+            {
+               ur += "&results=" + rdC; 
+            }
+    
+            var vn = $("#tm").is(":checked");
+    
+            if(tcp)
+            {
+              ur += "&start=" + psR;
+            }
+            else if(vn == true)
+            {
+               var s1 = $("#ss1").val();
+               var s2 = $("#ss2").val();
+    
+               //console.log(s1 , s2); 
+    
+              if(s1 != null && s2 != null)
+              {
+                 s1 = new Date(s1);
+                 s1.setHours(s1.getHours() - 2);
+                 s2 = new Date(s2);
+                 s2.setHours(s2.getHours() - 2);
+    
+                 //console.log(s1 , s2); 
+    
+                 s1 = tq(s1);
+                 s2 = tq(s2);
+    
+                 //console.log(s1 , s2); 
+    
+                 ur += "&start=" + s1;
+                 ur += "&end=" + s2;
+                
+                 function tq(ms){
+                   var dt = ms;
+                   const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
+    
+                   return `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())}%20`
+                         + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
+                 }
+              }
+            }
+    
+             //console.log(ur);
+           
+             fetch(ur).then((r)=>
+                 {
+                    if(!tcp){ console.log(r.status) }
+                    if(r.status == 200)
+                    {
+                      return r.text();
+                    }
+                 }).then((t)=>
+               {
+                  var d = JSON.parse(t);
+    
+                   if(!tcp){ console.log(d); } 
+    
+                 var rr = `<table style="width:100%; margin-top:10px; margin-bottom:10px;">
+                 <tr>
+                     <th> Date </th>
+                     <th> Current </th>
+                     <th> Voltage </th>
+                  </tr/>
+                  `;
+    
+                 const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
+     
+                 d.feeds.forEach((s)=>
+                   {
+                     var dt = new Date(s.created_at);
+                     dt.setHours(dt.getHours() + 0);
+                     
+                     var st = `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())} T `
+                     + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
+                     
+                     rr += `<tr>
+                     <td> `+ st + ` </td>
+                     <td> `+ s.field1 + ` </td>
+                     <td> `+ s.field2 + ` </td>
+                     </tr>`;
+                     
+                   });
+    
+                 rr += "</table>";
+    
+                 $("#get").html(rr);
+               });
+          } 
+      
         $("#imc").on("click" , function()
         {
             window.parent.get_weights(function(w_file)
