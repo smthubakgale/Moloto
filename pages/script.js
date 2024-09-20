@@ -1,4 +1,6 @@
 var model;
+var outs = [];
+
 function createModel() 
 {
     let md = tf.sequential();
@@ -26,6 +28,7 @@ function createModel()
   
     return md;
 }
+
 function saveModel(cb) 
 { 
    if (localStorage.length > 0)
@@ -33,7 +36,8 @@ function saveModel(cb)
       let item = Number(localStorage.getItem('saveNo'));
       model.save(`indexeddb://hevoPredict-${item + 1}`).then(()=>
       {
-        localStorage.setItem('saveNo', item + 1);
+         localStorage.setItem('saveNo', item + 1);
+         localStorage.setItem(`hevoOuts-${item + 1}` , JSON.stringify(outs));
         cb();
       });
    }
@@ -42,6 +46,7 @@ function saveModel(cb)
       model.save(`indexeddb://hevoPredict-1`).then(()=>
       {
           localStorage.setItem('saveNo', 1);
+          localStorage.setItem(`hevoOuts-${1}` , JSON.stringify(outs));
           cb();
       });
      
@@ -54,9 +59,9 @@ function saveModel(cb)
     const LEARNING_RATE = 0.25;
     const optimizer = tf.train.sgd(LEARNING_RATE);
     let item = Number(localStorage.getItem('saveNo'));
-    console.log(item);
-   if(item > 0)
-   { 
+    
+    if(item > 0)
+    { 
         tf.loadModel(`indexeddb://hevoPredict-${item}`).then((md)=>
         {
             var m = md;
@@ -66,7 +71,7 @@ function saveModel(cb)
               loss: 'categoricalCrossentropy',
               metrics: ['accuracy'],
             });
-    
+            outs = JSON.parse(localStorage.setItem(`hevoOuts-${item}`);
             cb(m);
         });
    }
