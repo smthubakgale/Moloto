@@ -57,17 +57,17 @@ function saveModel(cb)
     console.log(item);
    if(item > 0)
    { 
-        tf.loadModel(`indexeddb://hevoPredic-${item}`).then((md)=>
+        tf.loadModel(`indexeddb://hevoPredict-${item}`).then((md)=>
         {
-            var model = md;
+            var m = md;
             
-            model.compile({
+            m.compile({
               optimizer: optimizer,
               loss: 'categoricalCrossentropy',
               metrics: ['accuracy'],
             });
     
-            cb(model);
+            cb(m);
         });
    }
    else{
