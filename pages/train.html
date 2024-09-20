@@ -163,8 +163,11 @@
               var a = $("<a>");
               a.attr("href",     dataStr     );
               a.attr("download", "hevo.ids.json");
+              $("body").append(a);
               a.click();
               a.remove();
+
+              alert("Metal IDs saved successfully");
             }
             else{
               alert("No Labels Generated Yet");
