@@ -85,6 +85,35 @@
         
       </div>
       <br/>
+    <div class="fm">
+      <div>
+        <u> Get Data </u>
+      </div>
+      <div> 
+        <br/>
+        live : <input style="margin-left:10px;" id="lv" onchange="live(this)" type="checkbox" />
+        <input id="rfr" onchange="rdft(this)" style="margin-left:10px; width:60px; text-align:center;" type="number" min="1" value="1000" title="Refresh time ( milli seconds)">
+        <input onchange="rdd(this)" style="margin-left:10px; width:60px; text-align:center;" type="number" min="1" value="1" title="Past Value">
+        <select id="pst" title="Past Unit" onchange="getTime(this)" style="margin-left:10px">
+          <option> minute </option>
+          <option> hour </option>
+          <option> day </option>
+          <option> week </option>
+          <option> month </option>
+          <option> year </option>
+        </select>
+        <span style="margin-left:10px;" id="km"></span>
+        <br/><br/>
+        time filter : <input style="margin-left:10px;" id="tm" type="checkbox" />
+        <input id="ss1" style="margin-left:10px;" type="datetime-local" title="Start Time">
+        <input id="ss2" style="margin-left:10px;" type="datetime-local" title="End Time">
+        <br/><br/>
+        <button id="gt1" type="submit" class="btn btn-primary"> GET </button>
+        <br/>
+        <div id="get"></div>
+        <div style="height:50vh"></div>
+    </div>
+      
   </main>
   <script>
     $(window).on("load" , function()
