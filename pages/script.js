@@ -71,7 +71,7 @@ function saveModel(cb)
               loss: 'categoricalCrossentropy',
               metrics: ['accuracy'],
             });
-            outs = JSON.parse(localStorage.setItem(`hevoOuts-${item}`));
+            outs = JSON.parse(localStorage.getItem(`hevoOuts-${item}`));
             cb(m);
         });
    }
