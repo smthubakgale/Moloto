@@ -1,14 +1,29 @@
 function createModel() 
 {
-  var model = tf.sequential({
-       layers: [
-         tf.layers.dense({inputShape: [2,40], units:1 , activation: 'relu'}),    // input size [n ,2 ,40] -> shape [2,40] => [2 , 40*1] => [batch , 2 , 40]
-         tf.layers.flatten() ,                                                   // flatten -> [batch , 2*40 ] => [ batch , 80] 
-         tf.layers.dense({inputshape:[1] , units:40 ,  activation: 'softmax'}),   // output shape [n, 40 ] -> shape [40] => [40*1] => [batch , 40]
-       ]
-      });
-
-  return model;
+    let md = tf.sequential();
+    const hidden = tf.layers.dense({
+      units: 15,
+      inputShape: [3],
+      activation: 'sigmoid'
+    });
+  
+    const output = tf.layers.dense({
+      units: 9,
+      activation: 'softmax'
+    });
+    md.add(hidden);
+    md.add(output);
+  
+    const LEARNING_RATE = 0.25;
+    const optimizer = tf.train.sgd(LEARNING_RATE);
+  
+    md.compile({
+      optimizer: optimizer,
+      loss: 'categoricalCrossentropy',
+      metrics: ['accuracy'],
+    });
+  
+    return md;
 }
 
 function fromMatrix(mt)
