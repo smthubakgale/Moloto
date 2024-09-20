@@ -133,7 +133,29 @@
         var tcR;
         var psR;
         var qt = 1;
-
+      
+        window["predict"] = function (xs)
+        { 
+             var xp = tf.tensor2d([xs]);
+             var res = model.predict(xp);
+             var argMax = res.argMax(1);
+             var id = argMax.dataSync()[0];
+ 
+             var pd = "";
+          
+             outs.forEach((s)=>
+             {
+                 var d = s.id + ""; 
+                 var d2 = id + "";
+                  
+                 if(d == d2){ pd = s.Metal ; }
+ 
+             });
+ 
+             console.log(id , pd);
+  
+             return pd;
+        }
           window["rdft"] = function(ts)
           {
              clearInterval(tcR);
@@ -303,6 +325,7 @@
                      <th> Date </th>
                      <th> Current </th>
                      <th> Voltage </th>
+                     <th> Metal </th>
                   </tr/>
                   `;
     
@@ -315,11 +338,14 @@
                      
                      var st = `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())} T `
                      + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
+
+                     var mtq = predict( [ s.field1, s.field2] );
                      
                      rr += `<tr>
                      <td> `+ st + ` </td>
                      <td> `+ s.field1 + ` </td>
                      <td> `+ s.field2 + ` </td>
+                     <td> `+ mtq + ` </td>
                      </tr>`;
                      
                    });
