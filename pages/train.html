@@ -249,7 +249,7 @@
                   model.fit(xs, ys, {
                      shuffle: true,
                      validationSplit: 0.1,
-                     epochs: 400,  
+                     epochs: 100,  
                      callbacks:  tfvis.show.fitCallbacks(
                         { name: 'Training Performance' },
                         ['loss', 'acc'],
