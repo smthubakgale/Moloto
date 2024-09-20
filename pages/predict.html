@@ -136,6 +136,8 @@
       
         window["predict"] = function (xs)
         { 
+             console.log(model);
+          
              var xp = tf.tensor2d([xs]);
              var res = model.predict(xp);
              var argMax = res.argMax(1);
