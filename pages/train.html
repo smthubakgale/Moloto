@@ -259,7 +259,8 @@
                     { 
                        var ac = info.history.acc; 
                        ac = ac[ac.length - 1]; 
-                       $("#acr").html(ac);
+                       ac = parseFloat(ac);
+                       $("#acr").html((ac*100) + " %");
 
                        predict(0);
                        
@@ -313,7 +314,7 @@
              });
           
              $("#acm").html(yr[rx]);
-             $("#ac2").html(yr[rx]);
+             $("#acm2").html(ac);
              $("#pdm").html(id);
              $("#pdm2").html(pd);
         }
