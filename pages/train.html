@@ -74,6 +74,9 @@
   <main> 
 
       <div style="display:flex;"> 
+        <div>
+            <button id="imw" class="btn btn-info" > Save Metal IDS </button>
+        </div>
         <div style="margin-left:10px;">
             <button id="exw" class="btn btn-success" > Save Model </button>
         </div> 
@@ -151,7 +154,22 @@
         var model;
         var m_file;
         var w_file; 
- 
+
+        $("#imp").on("click" , function()
+        {
+            if(outs.length > 0)
+            {
+              var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(outs));
+              var a = $("<a>");
+              a.attr("href",     dataStr     );
+              a.attr("download", "hevo.ids.json");
+              a.click();
+              a.remove();
+            }
+            else{
+              alert("No Labels Generated Yet");
+            }
+        });
         $("#exw").on("click" ,  function()
         {
             if(model != null)
@@ -166,35 +184,7 @@
                 alert("No Trained Model exists");
             }
         });
-      
-        $("#imc").on("click" , function()
-        {
-            window.parent.get_weights(function(w_file)
-            {
-                window.parent.get_model(function(m_file)
-                {
-                     tf.loadLayersModel(tf.io.browserFiles([m_file , w_file])).then((md)=>
-                     {
-                         alert("Model Uploaded Successfully"); 
-                         model = md;
-                     })  
-                });
-            });
-        });
-        $("#imw").on("click" , function()
-        {
-            window.parent.import_weights(function(file)
-            {
-                 alert("Model Weights Uploaded"); 
-            });
-        });
-        $("#imm").on("click" , function()
-        {
-            window.parent.import_model(function(file)
-            {
-                 alert("Model Structure Uploaded"); 
-            });
-        });
+       
       
         $("#tts").on("click" , function()
         {
