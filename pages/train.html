@@ -164,8 +164,8 @@
               a.attr("href",     dataStr     );
               a.attr("download", "hevo.ids.json");
               $("body").append(a);
-              a.click();
-              a.remove();
+              a[0].click();
+              //a.remove();
              
 
               alert("Metal IDs saved successfully");
