@@ -62,7 +62,7 @@ function saveModel(cb)
     
     if(item > 0)
     { 
-        tf.loadLayersModel(`localstorage://hevoPredict-${item}`).then((md)=>
+        tf.loadModel(`localstorage://hevoPredict-${item}`).then((md)=>
         {
             var m = md;
             
