@@ -3,7 +3,7 @@ function createModel()
     let md = tf.sequential();
     const hidden = tf.layers.dense({
       units: 15,
-      inputShape: [3],
+      inputShape: [2],
       activation: 'sigmoid'
     });
   
