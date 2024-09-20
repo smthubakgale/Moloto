@@ -360,18 +360,31 @@
       
         $("#imc").on("click" , function()
         {
+           loadMd(function(md)
+           {
+               if(md)
+               {
+                 model = md;
+               }
+           });
+            /*
             window.parent.get_weights(function(w_file)
             {
                 window.parent.get_model(function(m_file)
                 {
-                     tf.loadLayersModel(tf.io.browserFiles([m_file , w_file])).then((md)=>
+                     if(m_file && w_file)
                      {
-                         alert("Model Uploaded Successfully"); 
-                         model = md;
-                     })  
+                         tf.loadLayersModel(tf.io.browserFiles([m_file , w_file])).then((md)=>
+                         {
+                             alert("Model Uploaded Successfully"); 
+                             model = md;
+                         }); 
+                     }
                 });
             });
+            */
         });
+      /*
         $("#imw").on("click" , function()
         {
             window.parent.import_weights(function(file)
@@ -386,6 +399,7 @@
                  alert("Model Structure Uploaded"); 
             });
         });
+      */
         $("#imd").on("click" , function()
         {
             window.parent.import_metal_ids(function(data)
