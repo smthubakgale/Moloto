@@ -112,7 +112,7 @@
       <div id="get"></div>
     
       <div>
-        <div>
+        <div style="display:flex;">
           <div> 
              <h2><b> Training Evaluation </b></h2>
           </div>
@@ -275,7 +275,17 @@
              }
             
         });
-
+      
+        $("#prd").on("click" , function()
+        {
+           var v = $("#sec").val();
+           if(v)
+           {
+             v = parseInt(v);
+             predict(v - 1);
+           }
+        });
+      
         function predict(rx)
         {
              var xp = tf.tensor2d([xr[rx]]);
