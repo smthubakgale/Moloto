@@ -156,7 +156,7 @@
 
             function proc()
             {
-               var xp = tf.tensor2d([xs]);
+               var xp = tf.tensor2d([xs] , [1 , 2]);
                var res = model.predict(xp);
                var argMax = res.argMax(1);
                var id = argMax.dataSync()[0];
@@ -366,7 +366,7 @@
                        var st = `${dt.getFullYear()}-${padL(dt.getMonth()+1)}-${padL(dt.getDate())} T `
                        + `${padL(dt.getHours())}:${padL(dt.getMinutes())}:${padL(dt.getSeconds())}`;
   
-                       predict( [ s.field1, s.field2]  , function(mtq)
+                       predict( [ parseInt(s.field1) , parseInt(s.field2) ]  , function(mtq)
                        { 
                            rr += `<tr>
                            <td> `+ st + ` </td>
