@@ -112,8 +112,33 @@
         <input id="ss1" style="margin-left:10px;" type="datetime-local" title="Start Time">
         <input id="ss2" style="margin-left:10px;" type="datetime-local" title="End Time">
         <br/><br/>
-        <button id="gt1" type="submit" class="btn btn-primary"> GET </button>
-        <br/>
+         
+        <div style="display:flex;">
+          <div>
+             <button id="gt1" type="submit" class="btn btn-primary"> GET </button>
+          </div>
+          <div style="flex:1;"></div>
+          <div>
+            <button id="cpy" type="submit" class="btn btn-warning"> Copy </button>
+          </div>
+          <div>
+            <button id="dwn" type="submit" class="btn btn-success"> Download </button>
+          </div>
+          <div>
+            <select>
+              <option> Data </option>
+              <option> Report </option>
+            </select> 
+          </div>
+          <div> 
+            <select>
+              <option> Line </option>
+              <option> Bar </option>
+            </select> 
+          </div>
+        </div>
+
+         <br/>
         <div id="get"></div>
         <div style="height:50vh"></div>
     </div>
