@@ -1,3 +1,6 @@
+ 
+var m_file;
+var w_file; 
 var model;
 var outs = [];
 
