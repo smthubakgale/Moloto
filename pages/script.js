@@ -29,6 +29,58 @@ function createModel()
     return md;
 }
 
+$(window).on("load",function(){
+    $("#imc").on("click" , function()
+        {
+            window.parent.get_weights(function(w_file)
+            {
+                window.parent.get_model(function(m_file)
+                {
+                     tf.loadLayersModel(tf.io.browserFiles([m_file , w_file])).then((md)=>
+                     {
+                         alert("Model Uploaded Successfully"); 
+                         model = md;
+                     })  
+                });
+            });
+        });
+        $("#imw").on("click" , function()
+        {
+            window.parent.import_weights(function(file)
+            {
+                 alert("Model Weights Uploaded"); 
+            });
+        });
+        $("#imm").on("click" , function()
+        {
+            window.parent.import_model(function(file)
+            {
+                 alert("Model Structure Uploaded"); 
+            });
+        });
+        $("#exw").on("click" ,  function()
+        { 
+            if(model != null)
+            {
+                /*
+               saveModel(function()
+               {
+                  alert("Weights Saved Successfully");
+               }); 
+              */
+                 model.save('downloads://hevo').then(()=>
+                 {
+                    alert("Weights Saved Successfully");
+                 });
+              
+            }
+            else
+            {
+                alert("No Trained Model exists");
+            }
+        });
+});
+
 function saveModel(cb) 
 { 
    if (localStorage.length > 0)
