@@ -298,11 +298,11 @@
 
              dts.forEach((s)=>
              {
-                 xr.push([ s.Voltage , s.Current]);
+                 xr.push([ parseInt(s.Voltage) , parseInt(s.Current)]);
                  yr.push( s.ID );
              });
           
-             var xp = tf.tensor2d([xr[rx]]);
+             var xp = tf.tensor2d([xr[rx]] , [xr.length , 2]);
              var res = model.predict(xp);
              var argMax = res.argMax(1);
              var id = argMax.dataSync()[0];
