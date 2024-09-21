@@ -41,8 +41,17 @@ $(window).on("load",function(){
                 {
                      tf.loadLayersModel(tf.io.browserFiles([m_file , w_file])).then((md)=>
                      {
-                         alert("Model Uploaded Successfully"); 
                          model = md;
+                         const LEARNING_RATE = 0.25;
+                         const optimizer = tf.train.sgd(LEARNING_RATE);
+                      
+                          model.compile({
+                           optimizer: optimizer,
+                           loss: 'categoricalCrossentropy',
+                           metrics: ['accuracy'],
+                         });
+                      
+                         alert("Model Uploaded Successfully"); 
                      })  
                 });
             });
