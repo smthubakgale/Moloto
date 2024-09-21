@@ -302,7 +302,7 @@
                  yr.push( s.ID );
              });
           
-             var xp = tf.tensor2d([xr[rx]] , [xr.length , 2]);
+             var xp = tf.tensor2d([xr[rx]] , [1 , 2]);
              var res = model.predict(xp);
              var argMax = res.argMax(1);
              var id = argMax.dataSync()[0];
